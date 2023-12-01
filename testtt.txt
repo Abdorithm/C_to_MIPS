@@ -1,0 +1,28 @@
+addi $s1 $s1 $ZERO
+addi $s1 %s1 4
+addi $s2 $s2 $ZERO
+addi $s2 %s2 3
+addi $s3 $s3 $ZERO
+addi $s3 %s1 7
+add $s4 $s1 $s2
+addi $s4 %s3 4
+
+int c = a + b;
+
+int or double or char
+
+.reg_s = {
+    {"$s0", 4, c},
+    {"$s1", 3, g},
+    {"$s2", 3, a},
+    {"$s3", 7, b},
+    {"$s4", 0, NULL},
+    {"$s5", 0, NULL},
+    {"$s6", 0, NULL},
+    {"$s7", 0, NULL}
+
+int a = c + g; 
+int b = 7;
+a = 4 + b;
+a = b + c;
+->a = g;

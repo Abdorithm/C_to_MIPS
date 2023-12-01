@@ -1,21 +1,36 @@
-#include "main.h"
+#include "headers/main.h"
 
 /**
  *read_line - ...
+ *@content: ...
+ *@counter: ...
+ *@file: ...
  *Return: string or null
  */
-char *read_line(void)
-{
-	char *line = NULL;
-	size_t len = 0;
-	ssize_t n;
 
-	n = getline(&line, &len, stdin);
-	if (n == -1)
+void readline(char *content, unsigned int counter, FILE *file)
+{
+	char *leftside, *rightside, *datatype, *namevar;
+	
+	(void)file;
+	(void)counter;
+	leftside = strtok(content, "=");
+	rightside = strtok(NULL, "=");
+
+	datatype = strtok(leftside, " ");
+	namevar = strtok(NULL, " ");
+	(void)datatype;
+
+	if (namevar != NULL) 
 	{
-		free(line);
-		return (NULL);
+		/*new variable in regsiter*/
+		put_in_register(namevar, rightside);
+	}
+	else
+	{
+		/*variable is already exist in register*/
 	}
 
-	return (line);
+	printf("leftside: %s\n", leftside);
+	printf("rightside: %s\n", rightside);
 }
