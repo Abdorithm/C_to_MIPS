@@ -1,5 +1,6 @@
 #include "headers/main.h"
 
+
 all_reg regs = {
 	{
 		{"$s0", 0, NULL},
