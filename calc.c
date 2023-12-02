@@ -8,5 +8,5 @@
 
 int calc(char *rightside)
 {
-    
+
 }
