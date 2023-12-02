@@ -29,6 +29,7 @@ int main(int argc, char *argv[]);
 
 void readline(char *content, unsigned int counter, FILE *file);
 void put_in_register(char *namevar, char *rightside);
+int calc(char *rightside);
 
 #endif
 
