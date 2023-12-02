@@ -36,6 +36,13 @@ all_reg regs = {
 	{"$zero", 0, NULL}
 };
 
+/**
+ * main - entry point
+ * @argc: number of arguments
+ * @argv: arguments vector
+ *
+ * Return: ...
+ */
 int main(int argc, char *argv[])
 {
 	char *content;
@@ -69,5 +76,5 @@ int main(int argc, char *argv[])
 		free(content);
 	}
 	fclose(file);
-	return(0);
+	return (0);
 }
