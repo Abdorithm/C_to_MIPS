@@ -69,5 +69,5 @@ int main(int argc, char *argv[])
 		free(content);
 	}
 	fclose(file);
-	return(0);
+	return (0);
 }

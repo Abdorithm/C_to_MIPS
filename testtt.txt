@@ -7,7 +7,25 @@ addi $s3 %s1 7
 add $s4 $s1 $s2
 addi $s4 %s3 4
 
-int c = a + b;
+int c = 0 0 9 * 5 / 2;
+              ^
+-------------
+lw t0 4
+lw t1 5
+mul t1 t1 t0
+
+int c = 0 0 9 * 5 / 2;
+------------
+lw t0 5
+lw t1 2
+div t1 t0 t1
+
+int c = 0 0 0 0 45 / 2;
+------------
+addi t1 t1 2
+int c = 22;
+
+
 
 int or double or char
 

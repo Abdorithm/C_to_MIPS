@@ -11,7 +11,7 @@
 void readline(char *content, unsigned int counter, FILE *file)
 {
 	char *leftside, *rightside, *datatype, *namevar;
-	
+
 	(void)file;
 	(void)counter;
 	leftside = strtok(content, "=");
@@ -21,16 +21,16 @@ void readline(char *content, unsigned int counter, FILE *file)
 	namevar = strtok(NULL, " ");
 	(void)datatype;
 
-	if (namevar != NULL) 
+	if (namevar != NULL)
 	{
-		/*new variable in regsiter*/
+		/*new variable in regsiter int a = 5*/
 		put_in_register(namevar, rightside);
 	}
 	else
 	{
-		/*variable is already exist in register*/
+		/*variable is already exist in register a = 5*/
 	}
 
-	printf("leftside: %s\n", leftside);
-	printf("rightside: %s\n", rightside);
+	/*printf("leftside: %s\n", leftside);*/
+	/*printf("rightside: %s\n", rightside);*/
 }
