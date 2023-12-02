@@ -1,8 +1,8 @@
 #include "headers/main.h"
 
 /**
- * calc - ...
- * @rightside: ...
+ * calc - calculate the value of rightside
+ * @rightside: the value that have to be in register
  * Return: calculated value
  */
 

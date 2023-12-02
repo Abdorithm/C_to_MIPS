@@ -36,14 +36,6 @@ all_reg regs = {
 	{"$zero", 0, NULL}
 };
 
-/**
- *read_line - ...
- *@content: ...
- *@counter: ...
- *@file: ...
- *Return: string or null
- */
-
 int main(int argc, char *argv[])
 {
 	char *content;

@@ -1,9 +1,9 @@
 #include "headers/main.h"
 
 /**
- * put_in_register - ...
- * @namevar: ...
- * @rightside: ...
+ * put_in_register - put a new variable in register
+ * @namevar: name of register
+ * @rightside: the value that have to be in register
  * Return: void
 */
 
