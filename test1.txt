@@ -1,2 +1,5 @@
 int c = 5 + 3 + 2 + 300;
+<<<<<<< HEAD
 int b = 12 + 12;
+=======
+>>>>>>> 53c3c3e (build a structure of code and add a function)
