@@ -44,6 +44,7 @@ int main(int argc, char *argv[])
 	ssize_t cntr_line = 1;
 	unsigned int counter = 0;
 
+	/*check if the file name is already exist or not*/
 	if (argc != 2)
 	{
 		printf("Write the file name and try again\n");
@@ -55,6 +56,7 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
+	/*read line by line*/
 	while (cntr_line > 0)
 	{
 		content = NULL;
