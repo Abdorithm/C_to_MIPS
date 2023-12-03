@@ -77,20 +77,18 @@ int calc(char *rightside)
 {
 	instruction_t opst[] = {
 				{"+", add},
+				{"-", sub},
+				{"*", mul},
+				{"/", divs},
+				{"%", mod},
 				{NULL, NULL}
 				};
-	/*
-	{'-', mins},
-	{'*', mul},
-	{'/', div},
-	{'%', mod},
-	{'<<', ssl},
-	{'>>', ssr},
-	*/
 	char **seprateline;
 	unsigned int i = 0, j= 0;
 	int value = 0;
 
+	/*{'<<', ssl},*/
+	/*{'>>', ssr},*/
 	seprateline = get_argv(rightside);
 
 	i = 0;
