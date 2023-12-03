@@ -66,11 +66,11 @@ char **get_argv(char *strRead);
 int calc(char *rightside);
 
 int add(int right, int left);
-/*int mins(int right, int left);
+int sub(int right, int left);
 int mul(int right, int left);
-int div(int right, int left);
+int divs(int right, int left);
 int mod(int right, int left);
-int ssl(int right, int left);
-int ssr(int right, int left);*/
+/*int ssl(int right, int left);*/
+/*int ssr(int right, int left);*/
 
 #endif
