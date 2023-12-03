@@ -1,5 +1,2 @@
 int c = 5 + 3 + 2 + 300;
-<<<<<<< HEAD
-int b = 12 + 12;git pull origin main
-=======
->>>>>>> a61d861 (build a structure of code and add a function)
+int b = 12 + 12;
