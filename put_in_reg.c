@@ -12,7 +12,8 @@ int check(char *rightside)
 
 	for (i = 0; rightside[i] != '\0'; i++)
 	{
-		if (rightside[i] == '+' || rightside[i] == '-' || rightside[i] == '*' || rightside[i] == '/')
+		if (rightside[i] == '+' || rightside[i] == '-'
+			|| rightside[i] == '*' || rightside[i] == '/')
 			return (0);
 	}
 	return (1);

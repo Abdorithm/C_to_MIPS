@@ -1,13 +1,13 @@
 #include "headers/main.h"
 
 /**
- *read_line - read a line from file
- *@content: content of line
- *@counter: counter of line
- *@file: name file
- *Return: void
+ * readline - read a line from file
+ * @content: content of line
+ * @counter: counter of line
+ * @file: name file
+ *
+ * Return: void
  */
-
 void readline(char *content, unsigned int counter, FILE *file)
 {
 	char *leftside, *rightside, *datatype, *namevar;
