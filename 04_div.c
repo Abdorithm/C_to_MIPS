@@ -9,9 +9,9 @@
 
 int divs(int right, int left)
 {
-    int res;
+	int res;
 
-    res = right / left;
+	res = right / left;
 	printf("lw $t0 %d\nlw $t1 %d\ndiv $t2 $t0 $t1\n", right, left);
 	return (res);
 }

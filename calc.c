@@ -2,14 +2,13 @@
 
 /**
  * tostring - convert int to string
- * str[]: the string
- * num: the number
+ * @str: the string
+ * @num: the number
 */
-
 void tostring(char str[], int num)
 {
 	int i, rem, len = 0, n;
- 
+
 	n = num;
 	while (n != 0)
 	{
@@ -28,9 +27,9 @@ void tostring(char str[], int num)
 /**
  * get_argv - a function to get the command we typed using strtok.
  * @strRead: the command we typed.
+ *
  * Return: array of chars.
  */
-
 char **get_argv(char *strRead)
 {
 	char **argv = NULL, *token, *tmp, *tmp_token;
@@ -70,9 +69,15 @@ char **get_argv(char *strRead)
 /**
  * calc - calculate the value of rightside
  * @rightside: the value that have to be in register
+ *
  * Return: calculated value
+ * Description:
+ * int c = 4 + 5 * 5  / 2;
+ * int c = 0 0 9 * 5  / 2;
+ * int c = 0 0 0 0 45 / 2;
+ * int c = 0 0 0 0 0  0 22;
+ *					  ^
  */
-
 int calc(char *rightside)
 {
 	instruction_t opst[] = {
@@ -84,11 +89,9 @@ int calc(char *rightside)
 				{NULL, NULL}
 				};
 	char **seprateline;
-	unsigned int i = 0, j= 0;
+	unsigned int i = 0, j = 0;
 	int value = 0;
 
-	/*{'<<', ssl},*/
-	/*{'>>', ssr},*/
 	seprateline = get_argv(rightside);
 
 	i = 0;
@@ -96,16 +99,9 @@ int calc(char *rightside)
 	for (j = 0; seprateline[j] != NULL; j++)
 	{
 		while (opst[i].opcode != NULL)
-		{			
+		{
 			if (strcmp(seprateline[j], opst[i].opcode) == 0)
 			{
-				/*
-				int c = 4 + 5 * 5  / 2;
-				int c = 0 0 9 * 5  / 2;
-				int c = 0 0 0 0 45 / 2;
-				int c = 0 0 0 0 0  0 22;
-									^
-				*/
 				value = opst[i].f(atoi(seprateline[j - 1]), atoi(seprateline[j + 1]));
 				seprateline[j - 1] = 0;
 				seprateline[j] = 0;
