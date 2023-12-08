@@ -18,12 +18,14 @@ gcc -Wall -Wextra -Werror -pedantic  -std=gnu89  headers/main.h  \*.c  -o mipsif
 
      for example:
     ```bash
-    touch tests/test.txt```
+    touch tests/test.txt
+    ```
 2. run the mipsify file and add your file in the test directory as an argument
 
     for example:
     ```bash
-    ./mipsify tests/test.txt```
+    ./mipsify tests/test.txt
+    ```
 
 ## Code Conversion Assumptions
 
