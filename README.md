@@ -1,24 +1,24 @@
 # C_to_MIPS
 
-Compile using the command:
+It is a program for converting from the C language to the MIPS language. The program is designed in the C language and contains many features. It converts all arithmetic operations, if statements, and loops. You can refer to the usage instructions for a better understanding. Additionally, to facilitate and simplify the code, we have made some assumptions that you should take into consideration and read below in order to use the code correctly.
+
+## About us
+
+We are six students at the Faculty of Engineering in Port Said, studying Software Engineering. We have undertaken this project as an application for the Microprocessor course to facilitate the conversion of codes from C to MIPS.
+
+## Compileing
 
 <pre>
 gcc -Wall -Wextra -Werror -pedantic  -std=gnu89  headers/main.h  \*.c  -o mipsify -g
 </pre>
 
-Run using the command:
+## Usage instructions
 
-<pre>
-./mipsify <file>
-</pre>
+1. first, you must create your C code and put it in the `/test` directory.
 
-## How to use it
+     for example:
+    <pre>touch tests/test.txt</pre>
+2. run the mipsify file and add your file in the test directory as an argument
 
-1. first you have to creat your C code and put it in `/test` directory.
-
-    - for example:
-    ><pre>touch tests/test.txt</pre>
-2. run the mipsify file and add your file in test dirctory as argment
-
-    - for example:
-    ><pre>./mipsify tests/test.txt</pre>
+    for example:
+    <pre>./mipsify tests/test.txt</pre>
