@@ -56,10 +56,11 @@ typedef struct instruction_s
 
 extern all_reg regs;
 
+int main(int argc, char *argv[]);
+
 /* functions */
 void readline(char *content, unsigned int counter, FILE *file);
 void put_in_register(char *namevar, char *rightside);
-char **get_argv(char *strRead);
 char **get_argv(char *strRead);
 
 /*Opration*/
@@ -72,5 +73,10 @@ int divs(int right, int left);
 int mod(int right, int left);
 /*int ssl(int right, int left);*/
 /*int ssr(int right, int left);*/
+
+/*Handle if*/
+void handel_if(char **tokens_line);
+
+
 
 #endif
