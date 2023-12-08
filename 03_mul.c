@@ -1,4 +1,4 @@
-#include "headers/main.h"
+#include "main.h"
 
 /**
  * mul - mul two numbers
