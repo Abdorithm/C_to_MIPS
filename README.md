@@ -17,11 +17,11 @@ gcc -Wall -Wextra -Werror -pedantic  -std=gnu89  headers/main.h  \*.c  -o mipsif
 1. first, you must create your C code and put it in the `/test` directory.
 
      for example:
-    <pre>touch tests/test.txt</pre>
+    ```touch tests/test.txt```
 2. run the mipsify file and add your file in the test directory as an argument
 
     for example:
-    <pre>./mipsify tests/test.txt</pre>
+    ```./mipsify tests/test.txt```
 
 ## Code Conversion Assumptions
 
