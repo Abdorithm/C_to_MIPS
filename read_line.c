@@ -14,12 +14,13 @@ void readline(char *content, unsigned int counter, FILE *file)
 
 	(void)file;
 	(void)counter;
+	(void)datatype;
+
 	leftside = strtok(content, "=");
 	rightside = strtok(NULL, "=");
 
 	datatype = strtok(leftside, " ");
 	namevar = strtok(NULL, " ");
-	(void)datatype;
 
 	if (namevar != NULL)
 	{
@@ -30,7 +31,4 @@ void readline(char *content, unsigned int counter, FILE *file)
 	{
 		/*variable is already exist in register a = 5*/
 	}
-
-	/*printf("leftside: %s\n", leftside);*/
-	/*printf("rightside: %s\n", rightside);*/
 }

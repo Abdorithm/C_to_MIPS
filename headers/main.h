@@ -7,6 +7,22 @@
 #include <unistd.h>
 
 /**
+ * struct expr_s - doubly linked list
+ * @data: value
+ * @prev: points to the previous node
+ * @next: points to the next node
+ *
+ * Description: doubly linked list node structure
+ * used to navigate through the expression
+ */
+typedef struct expr_s
+{
+	char *data;
+	struct expr_s *prev;
+	struct expr_s *next;
+} expr_t;
+
+/**
  * struct reg_s - Represents one register
  * @name: name of the data type
  * @value: value of the data type
@@ -47,7 +63,6 @@ typedef struct all_reg_s
  *
  * Description: opcode and its function
  */
-
 typedef struct instruction_s
 {
 	char *opcode;
@@ -61,16 +76,21 @@ void readline(char *content, unsigned int counter, FILE *file);
 void put_in_register(char *namevar, char *rightside);
 char **get_argv(char *strRead);
 char **get_argv(char *strRead);
+char *tostring(int number);
+void free_2d(char **array);
+expr_t *fill_linked_list(char **expression);
+void print_list(expr_t *head);
+int do_priority(instruction_t opst[], expr_t *head);
+void free_list(expr_t *head);
 
-/*Opration*/
+/* Operations */
 int calc(char *rightside);
-
 int add(int right, int left);
 int sub(int right, int left);
 int mul(int right, int left);
 int divs(int right, int left);
 int mod(int right, int left);
-/*int ssl(int right, int left);*/
-/*int ssr(int right, int left);*/
+int shift_left(int right, int left);
+int shift_right(int right, int left);
 
 #endif

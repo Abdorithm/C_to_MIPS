@@ -38,6 +38,57 @@ all_reg regs = {
 };
 
 /**
+ * overview - ..
+ *
+ * return: void
+ */
+void overview(void)
+{
+	int i;
+
+	printf("\n/*****************************************************/\n"
+			" *** \tMAPPING OF REGISTERS:\n");
+	for (i = 0; i < 4; i++)
+	{
+		if (regs.reg_a[i].var != NULL)
+			printf(" * %s ---> %d\n", regs.reg_a[i].name, regs.reg_a[i].value);
+	}
+
+	for (i = 0; i < 8; i++)
+	{
+		if (regs.reg_s[i].var != NULL)
+			printf(" * %s ---> %d\n", regs.reg_s[i].name, regs.reg_s[i].value);
+	}
+
+	for (i = 0; i < 10; i++)
+	{
+		if (regs.reg_t[i].var != NULL)
+			printf(" * %s ---> %d\n", regs.reg_t[i].name, regs.reg_t[i].value);
+	}
+}
+
+/**
+ * credits - ..
+ *
+ * return: void
+ */
+void credits(void)
+{
+	printf("\n/*****************************************************/\n"
+			" *** \tmipsify - a c-to-mips parser\n"
+			" *\n"
+			" * mipsify is a tool that converts c code to mips assembly language,\n"
+			" * enabling developers to analyze and understand the mips assembly\n"
+			" * representation of their c programs.\n"
+			" *\n"
+			" * copyright (c) 2023 computer & control dept.\n"
+			" *\n"
+			" * contributors: abdelrahman magdi, youssef elzedy, eslam samy,\n"
+			" *               mohamed hamdy, hazem osama, omar essam\n"
+			" *****************************************************/\n\n");
+}
+
+/**
  * main - entry point
  * @argc: number of arguments
  * @argv: arguments vector
@@ -77,5 +128,7 @@ int main(int argc, char *argv[])
 		free(content);
 	}
 	fclose(file);
+	overview();
+	credits();
 	return (0);
 }

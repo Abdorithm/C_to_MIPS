@@ -2,26 +2,18 @@
 
 /**
  * tostring - convert int to string
- * @str: the string
- * @num: the number
+ * @number: the number
+ *
+ * Return: the string representation
 */
-void tostring(char str[], int num)
+char *tostring(int number)
 {
-	int i, rem, len = 0, n;
+	int size = snprintf(NULL, 0, "%d", number);
+	char *result = (char *)malloc(size + 1);
 
-	n = num;
-	while (n != 0)
-	{
-		len++;
-		n /= 10;
-	}
-	for (i = 0; i < len; i++)
-	{
-		rem = num % 10;
-		num = num / 10;
-		str[len - (i + 1)] = rem + '0';
-	}
-	str[len] = '\0';
+	snprintf(result, size + 1, "%d", number);
+
+	return (result);
 }
 
 /**
@@ -38,11 +30,11 @@ char **get_argv(char *strRead)
 	tmp = strdup(strRead);
 	if (tmp == NULL)
 		return (NULL);
-	tmp_token = strtok(tmp, " ");
+	tmp_token = strtok(tmp, " ;");
 	while (tmp_token != NULL)
 	{
 		size++;
-		tmp_token = strtok(NULL, " ");
+		tmp_token = strtok(NULL, " ;");
 	}
 
 	free(tmp), size++;
@@ -51,7 +43,7 @@ char **get_argv(char *strRead)
 		return (NULL);
 	for (i = 0; i < size - 1; i++)
 	{
-		token = strtok((i ? NULL : strRead), " ");
+		token = strtok((i ? NULL : strRead), " ;");
 		argv[i] = strdup(token);
 		if (argv[i] == NULL)
 		{
@@ -67,52 +59,94 @@ char **get_argv(char *strRead)
 }
 
 /**
+ * do_priority - do operation with correct priority
+ * @opst: struct of operations
+ * @head: head of linked list
+ *
+ * Return: result
+ */
+int do_priority(instruction_t opst[], expr_t *head)
+{
+	expr_t *tmp = head;
+	int i = 0, value = 0, done = 0;
+	int priority[10] = {0, 1, 2, 2, 3, 4, 5, 6, 7, 7};
+
+	while (opst[priority[i]].opcode != NULL)
+	{
+		tmp = head;
+		while (tmp)
+		{
+			done = 0;
+			if (strcmp(tmp->data, opst[priority[i]].opcode) == 0)
+			{
+				value = opst[priority[i]].f(atoi(tmp->prev->data), atoi(tmp->next->data));
+				done = 1;
+			}
+			else if (strcmp(tmp->data, opst[priority[i + 1]].opcode) == 0)
+				value = opst[priority[i + 1]].f(atoi(tmp->prev->data),
+						atoi(tmp->next->data)), done = 1;
+			if (done)
+			{
+				tmp->data = tostring(value), tmp->prev = tmp->prev->prev;
+				if (tmp->prev)
+				{
+					free(tmp->prev->next->data), free(tmp->prev->next), tmp->prev->next = tmp;
+				}
+				else
+					head = tmp;
+				tmp->next = tmp->next->next;
+				if (tmp->next)
+				{
+					free(tmp->next->prev->data), free(tmp->next->prev);
+					tmp->next->prev = tmp;
+				}
+			}
+			tmp = tmp->next;
+		} /* print_list(head); */
+		i += 2;
+	}
+	return (value);
+}
+
+/**
  * calc - calculate the value of rightside
  * @rightside: the value that have to be in register
  *
  * Return: calculated value
- * Description:
- * int c = 4 + 5 * 5  / 2;
- * int c = 0 0 9 * 5  / 2;
- * int c = 0 0 0 0 45 / 2;
- * int c = 0 0 0 0 0  0 22;
- *					  ^
+ * Description: ...
  */
 int calc(char *rightside)
 {
 	instruction_t opst[] = {
-				{"+", add},
-				{"-", sub},
+				{"<<", shift_left},
+				{">>", shift_right},
+				{"%", mod},
 				{"*", mul},
 				{"/", divs},
-				{"%", mod},
+				{"+", add},
+				{"-", sub},
 				{NULL, NULL}
 				};
-	char **seprateline;
-	unsigned int i = 0, j = 0;
+	char **separateline = get_argv(rightside);
 	int value = 0;
+	expr_t *head = fill_linked_list(separateline);
 
-	seprateline = get_argv(rightside);
-
-	i = 0;
-
-	for (j = 0; seprateline[j] != NULL; j++)
-	{
-		while (opst[i].opcode != NULL)
-		{
-			if (strcmp(seprateline[j], opst[i].opcode) == 0)
-			{
-				value = opst[i].f(atoi(seprateline[j - 1]), atoi(seprateline[j + 1]));
-				seprateline[j - 1] = 0;
-				seprateline[j] = 0;
-				tostring(seprateline[j + 1], value);
-				j++;
-				break;
-			}
-			i++;
-		}
-		i = 0;
-	}
+	free_2d(separateline); /* we don't need it anymore! */
+	value = do_priority(opst, head);
+	free_list(head);
 
 	return (value);
+}
+
+/**
+ * free_2d - frees an array of strings form memory
+ * @array: the array
+ */
+void free_2d(char **array)
+{
+	int i = 0;
+
+	while (array[i])
+		free(array[i]), i++;
+	free(array);
 }
