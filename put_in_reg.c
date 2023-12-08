@@ -1,4 +1,4 @@
-#include "main.h"
+#include "headers/main.h"
 
 /**
  * check - check if the rightside is a number or not

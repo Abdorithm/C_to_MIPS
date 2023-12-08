@@ -1,4 +1,4 @@
-#include "main.h"
+#include "headers/main.h"
 
 /**
  * tostring - convert int to string

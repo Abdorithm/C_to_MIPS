@@ -1,4 +1,4 @@
-#include "main.h"
+#include "headers/main.h"
 
 
 all_reg regs = {
