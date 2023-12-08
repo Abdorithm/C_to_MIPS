@@ -47,7 +47,8 @@ void overview(void)
 	int i;
 
 	printf("\n/*****************************************************/\n"
-			" *** \tMAPPING OF REGISTERS:\n");
+			" *** \tMAPPING OF REGISTERS:\n"
+			" *\n");
 	for (i = 0; i < 4; i++)
 	{
 		if (regs.reg_a[i].var != NULL)
@@ -75,16 +76,16 @@ void overview(void)
 void credits(void)
 {
 	printf("\n/*****************************************************/\n"
-			" *** \tmipsify - a c-to-mips parser\n"
+			" *** \tMIPSify - a C-to-MIPS parser\n"
 			" *\n"
-			" * mipsify is a tool that converts c code to mips assembly language,\n"
-			" * enabling developers to analyze and understand the mips assembly\n"
-			" * representation of their c programs.\n"
+			" * MIPSify is a tool that converts C code to MIPS assembly language,\n"
+			" * enabling developers to analyze and understand the MIPS assembly\n"
+			" * representation of their C programs.\n"
 			" *\n"
 			" * copyright (c) 2023 computer & control dept.\n"
 			" *\n"
-			" * contributors: abdelrahman magdi, youssef elzedy, eslam samy,\n"
-			" *               mohamed hamdy, hazem osama, omar essam\n"
+			" * contributors: Abdelrahman Magdi, Youssef Elzedy, Eslam Samy,\n"
+			" *               Mohamed Hamdy, Hazem Osama, Omar Essam\n"
 			" *****************************************************/\n\n");
 }
 
