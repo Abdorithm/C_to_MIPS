@@ -11,3 +11,14 @@ Run using the command:
 <pre>
 ./mipsify <file>
 </pre>
+
+## How to use it
+
+1. first you have to creat your C code and put it in `/test` directory.
+
+    - for example:
+    ><pre>touch tests/test.txt</pre>
+2. run the mipsify file and add your file in test dirctory as argment
+
+    - for example:
+    ><pre>./mipsify tests/test.txt</pre>
