@@ -7,7 +7,7 @@ It is a program for converting from the C language to the MIPS language. The pro
 We are six students at the Faculty of Engineering in Port Said, studying Software Engineering. We have undertaken this project as an application for the Microprocessor course to facilitate the conversion of codes from C to MIPS.
 
 ## Compileing
-
+utilize this command to compile the code.
 <pre>
 gcc -Wall -Wextra -Werror -pedantic  -std=gnu89  headers/main.h  \*.c  -o mipsify -g
 </pre>
@@ -22,3 +22,21 @@ gcc -Wall -Wextra -Werror -pedantic  -std=gnu89  headers/main.h  \*.c  -o mipsif
 
     for example:
     <pre>./mipsify tests/test.txt</pre>
+
+## Code Conversion Assumptions
+
+We have made some assumptions in the code conversion to facilitate the process. Please consider these assumptions while using the code.
+
+### Assumptions:
+
+1. Multiplication Operation:
+   - Assume that the multiplication operation is performed using the "mul" instruction.
+     ```assembly
+     mul $s0, $s1, $s2
+     ```
+
+2. "muli" Operation:
+   - Assume that there is an operation called "muli" that multiplies a constant by a value already present in memory.
+     ```assembly
+     mul $s0, $s1, 5
+     ```
