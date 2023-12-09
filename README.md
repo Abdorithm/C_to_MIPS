@@ -14,18 +14,25 @@ gcc -Wall -Wextra -Werror -pedantic  -std=gnu89  headers/main.h  \*.c  -o mipsif
 
 ## Usage instructions
 
-1. first, you must create your C code and put it in the `/test` directory.
+Follow the steps below to use MIPSify on your C code.
 
-     for example:
-    ```bash
-    touch tests/test.txt
-    ```
-2. run the mipsify file and add your file in the test directory as an argument
+### Step 1: Create your C code
 
-    for example:
-    ```bash
-    ./mipsify tests/test.txt
-    ```
+First, create your C code and place it in the `/test` directory. For example:
+
+```bash
+touch tests/test.txt
+```
+
+### Step 2: Run MIPSify
+
+Run the `mipsify` script and provide your C file in the test directory as an argument. For example:
+
+```bash
+./mipsify tests/test.txt
+```
+
+This will execute the MIPSify tool on your C code and generate the corresponding MIPS assembly code. Ensure that the `mipsify` script has the necessary permissions to execute (`chmod +x mipsify`).
 
 ## Code Conversion Assumptions
 
