@@ -31,13 +31,9 @@ int main(int argc, char *argv[])
 	{
 		cntr_line = getline(&info.content, &size, info.file);
 		if (cntr_line == EOF)
-		{
-			free(info.content);
 			break;
-		}
-		info.tokens = get_argv(info.content);
-		free_2d(info.tokens);
 
+		info.tokens = get_argv(info.content);
 	}
 	/* exist */
 	free_all();
