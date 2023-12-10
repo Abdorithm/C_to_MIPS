@@ -87,15 +87,3 @@ int calc(char *rightside)
 	return (value);
 }
 
-/**
- * free_2d - frees an array of strings form memory
- * @array: the array
- */
-void free_2d(char **array)
-{
-	int i = 0;
-
-	while (array[i])
-		free(array[i++]);
-	free(array);
-}

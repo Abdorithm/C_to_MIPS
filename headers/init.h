@@ -39,4 +39,4 @@
         get_reg \
     }
 
-#endif // !INIT_H
+#endif

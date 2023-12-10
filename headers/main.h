@@ -77,11 +77,12 @@ typedef struct instruction_s
 extern all_reg regs;
 
 /* functions */
-void readline(char *content, unsigned int counter);
 void put_in_register(char *namevar, int value, char reg_name);
 reg *get_reg(char reg_name);
 char **get_argv(char *line);
+char *slice_token(char **token);
 int count_tokens(const char *str, const char *del);
+int expr_check(char ch);
 char *tostring(int number);
 void free_2d(char **array);
 expr_t *fill_linked_list(char **expression);
@@ -91,6 +92,7 @@ void free_node(expr_t *node);
 void free_list(expr_t *head);
 void overview(void);
 void credits(void);
+void malloc_failed(void);
 
 /* Operations */
 int calc(char *rightside);

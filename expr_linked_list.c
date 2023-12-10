@@ -69,32 +69,3 @@ void print_list(expr_t *head)
 		current = current->next;
 	}
 }
-
-/**
- * free_list - ...
- * @head: ...
- */
-void free_list(expr_t *head)
-{
-	expr_t *current = head;
-	expr_t *temp;
-
-	while (current)
-	{
-		temp = current;
-		current = current->next;
-		free_node(temp);
-	}
-}
-
-/**
-  * free_node - free a single node
-  * @node: the node to free
-  */
-void free_node(expr_t *node)
-{
-	if (node == NULL)
-		return;
-	free(node->data);
-	free(node);
-}

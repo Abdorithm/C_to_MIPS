@@ -12,7 +12,7 @@ all_reg regs = INIT_REGS;
 int main(int argc, char *argv[])
 {
 	char *content;
-	char **tokens;
+	notUsed char **tokens;
 	FILE *file;
 	size_t size = 0;
 	ssize_t cntr_line = 1;
@@ -35,15 +35,22 @@ int main(int argc, char *argv[])
 	{
 		content = NULL;
 		cntr_line = getline(&content, &size, file);
+		if (cntr_line == EOF)
+		{
+			free(content);
+			break;
+		}
 		tokens = get_argv(content);
-		
+		free_2d(tokens);
 		counter++;
 
 	}
 	/* exist */
 	fclose(file);
+	/*
 	overview();
 	credits();
+	*/
 
 	return (0);
 }

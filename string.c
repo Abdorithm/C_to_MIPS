@@ -1,4 +1,6 @@
 #include "headers/main.h"
+#include <stdlib.h>
+#include <string.h>
 
 /**
  * tostring - convert int to string
@@ -25,27 +27,37 @@ char *tostring(int number)
  */
 int count_tokens(const char *str, const char *delim)
 {
-	int count = 0, extra, i;
-	char *token, *str_copy = strdup(str);
+	int count = 0, expres, i;
+	char *token, *str_copy;
 
+
+	str_copy = strdup(str);
 	token = strtok(str_copy, delim);
 	while (token)
 	{
-		count++;
-		token = strtok(NULL, delim);
-		extra = 0;
+		expres = 0;
 		for (i = 0; token[i]; i++)
 		{
-			if (
-				token[i] == ';' || token[i] == ',' ||
-				token[i] == '(' || token[i] == ')' ||
-				token[i] == '{' || token[i] == '}'
-			)
-			extra++;
+			if (expr_check(token[i]))
+			{
+				if (i && !expr_check(token[i - 1]))
+					expres++;
+				expres++;
+			}
 		}
-		count += extra ? extra - 1 : 0;
+		/* this line for an edge case like this
+		 * var = x
+		 * without it the number of tokens will be 2
+		 * but as you see it has to be 3
+		 */
+		if (!expr_check(token[strlen(token) - 1]))
+			expres++;
+
+		/* count the expressions to make room for it later */
+		count += expres;
+	
+		token = strtok(NULL, delim);
 	}
-	count++;
 	free(str_copy);
 	return (count);
 }
@@ -61,16 +73,19 @@ char **get_argv(char *line)
 {
 	char *token;
 	char **arg = NULL;
-	int argCount = 0, num_tokens = 0;
+	int tokens_cnt;
+	int cnt = 0;
 
 
-	num_tokens = count_tokens(line, " \t\n");
-	if (num_tokens == 1)
+	tokens_cnt = count_tokens(line, " \t\n");
+
+	if (!tokens_cnt)
 	{
 		free(line);
 		return (NULL);
 	}
-	arg = malloc(sizeof(char *) * num_tokens);
+
+	arg = malloc(sizeof(char *) * (tokens_cnt + 1));
 	if (arg == NULL)
 	{
 		perror("error: allocating arg\n");
@@ -80,18 +95,40 @@ char **get_argv(char *line)
 	token = strtok(line, " \t\n");
 	while (token)
 	{
-		arg[argCount] = strdup(token);
-		if (arg[argCount++] == NULL)
-		{
-			perror("error: allocating arg\n");
-			free(line);
-			free_2d(arg);
-			exit(EXIT_FAILURE);
-		}
+		while (*token)
+			arg[cnt++] = slice_token(&token);
+
 		token = strtok(NULL, " \t\n");
 	}
-	arg[argCount] = NULL;
+	arg[tokens_cnt] = NULL;
 	free(line);
 	return (arg);
 }
 
+/**
+ * slice_token - slice a given token by the expression in it
+ *
+ * 
+ */
+char *slice_token(char **token)
+{
+	size_t slice_size;
+	char *new_slice;
+
+	slice_size = strcspn(*token, ";,(){}&|<<*/%+-=");
+
+	/* one of the delimiters */
+
+	if (slice_size == 0)
+		slice_size++;
+		
+	new_slice = malloc(sizeof(char) * (slice_size + 1));
+
+	/* need to free before exist to be implemented */
+	if (!new_slice)
+		malloc_failed();
+
+	strncpy(new_slice, *token, slice_size);
+	*token += slice_size;
+	return (new_slice);
+}

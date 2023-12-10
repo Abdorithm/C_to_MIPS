@@ -1,23 +1,29 @@
 #include "headers/main.h"
 
 /**
- * check - check if it's a mathematical operation
- * @rightside: the rightside of the line
+ * check - check if a char is an expression
+ * @ch: the char to check
  *
  * Return: 1 if it is otherwise 0
 */
-int check(char *rightside)
+int expr_check(char ch)
 {
-	int i = 0;
+	char expressions[] = {
+		';', ',', '(', ')',
+		'{', '}', '&', '|',
+		'>', '<', '*', '/',
+		'%', '+', '-', '='
 
-	for (i = 0; rightside[i] != '\0'; i++)
+	};
+	int size = sizeof(expressions) / sizeof(char);
+	int i;
+
+	for (i = 0; i < size; i++)
 	{
-		if (rightside[i] == '+' || rightside[i] == '-'
-			|| rightside[i] == '*' || rightside[i] == '/'
-			|| rightside[i] == '<' || rightside[i] == '>')
-			return (0);
+		if (ch == expressions[i])
+			return (1);
 	}
-	return (1);
+	return (0);
 }
 /**
  * get_reg - return an array for the corresponding register name
@@ -46,7 +52,7 @@ reg *get_reg(char reg_name)
 /**
  * put_in_register - put a new variable in register
  * @namevar: name of register
- * @rightside: the value that have to be in register
+ * @str: the value that have to be in register
  *
  * Return: void
 */
