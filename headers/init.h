@@ -1,7 +1,7 @@
 #ifndef INIT_H
 #define INIT_H
 
-#define INIT_REGS \
+#define INIT_INF \
     { \
 	{\
             {"$s0", 0, NULL}, \

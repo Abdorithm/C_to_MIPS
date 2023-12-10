@@ -1,7 +1,7 @@
 #include "headers/main.h"
 #include "headers/init.h"
 
-info_t info = INIT_REGS;
+info_t info = INIT_INF;
 /**
  * main - entry point
  * @argc: number of arguments
