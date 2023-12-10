@@ -42,8 +42,6 @@ int count_tokens(const char *str, const char *delim)
 /**
  * tokenize - split the line to multple strings
  *
- * @line: the line to tokenize
- *
  * Return: a pointer to the strings on success and NULL on failure
  */
 char **get_argv(char *line)
@@ -74,7 +72,7 @@ char **get_argv(char *line)
 		{
 			perror("error: allocating arg\n");
 			free(line);
-			free_2d(arg);
+      free_2d(arg);
 			exit(EXIT_FAILURE);
 		}
 		token = strtok(NULL, "; \t\n");
@@ -108,29 +106,30 @@ int do_priority(instruction_t opst[], expr_t *head)
 				tmp->data = tostring(value); 
 				if (tmp->prev->prev)
 				{
-					tmp->prev = tmp->prev->prev;
-					free_node(tmp->prev->next);
+          tmp->prev = tmp->prev->prev;
+          free_node(tmp->prev->next);
 					tmp->prev->next = tmp;
 				}
 				else
-			{
-					free_node(tmp->prev);
-					tmp->prev = NULL;
+        {
+          free_node(tmp->prev);
+          tmp->prev = NULL;
 					head = tmp;
-				}
+        }
 
-				if (tmp->next->next)
-				{
-					tmp->next = tmp->next->next;
-					free_node(tmp->next->prev);
-					tmp->next->prev = tmp;
-				}
-				else
-			{
-					free_node(tmp->next);
-					tmp->next = NULL;
-				}
+        if (tmp->next->next)
+        {
+          tmp->next = tmp->next->next;
+          free_node(tmp->next->prev);
+          tmp->next->prev = tmp;
+        }
+        else
+        {
+          free_node(tmp->next);
+          tmp->next = NULL;
+        }
 			}
+      print_list(tmp);
 			tmp = tmp->next;
 		} /* print_list(head); */
 
@@ -148,24 +147,28 @@ int do_priority(instruction_t opst[], expr_t *head)
  */
 int calc(char *rightside)
 {
-	instruction_t opst[] = {
-		{"<<", shift_left},
-		{">>", shift_right},
-		{"%", mod},
-		{"*", mul},
-		{"/", divs},
-		{"+", add},
-		{"-", sub},
-		{NULL, NULL}
-	};
+	int i;
 
+  instruction_t opst[] = {
+				{"<<", shift_left},
+				{">>", shift_right},
+				{"%", mod},
+				{"*", mul},
+				{"/", divs},
+				{"+", add},
+				{"-", sub},
+				{NULL, NULL}
+				};
 	char **separateline = get_argv(rightside);
 	int value = 0;
+  for (i = 0; separateline[i]; i++)
+  {
+    printf("%d -> %s\n",i,  separateline[i]);
+  }
 	expr_t *head = fill_linked_list(separateline);
 
 	free_2d(separateline); /* we don't need it anymore! */
 	value = do_priority(opst, head);
-	print_list(head);
 	free_list(head);
 
 	return (value);

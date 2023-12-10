@@ -1,10 +1,10 @@
 #include "headers/main.h"
 
 /**
- * check - check if the rightside is a number or not
+ * check - check if it's a mathematical operation
  * @rightside: the rightside of the line
  *
- * Return: 1 if it is a number and 0 if not
+ * Return: 1 if it is otherwise 0
 */
 int check(char *rightside)
 {
@@ -19,6 +19,29 @@ int check(char *rightside)
 	}
 	return (1);
 }
+/**
+ * get_reg - return an array for the corresponding register name
+ *
+ * @reg_name: register name
+ *
+ * Return: register array if found otherwise NULL
+ */
+reg *get_reg(char reg_name)
+{
+	if ('s' == reg_name)
+		return (regs.reg_s);
+
+	if ('a' == reg_name)
+		return (regs.reg_a);
+
+	if ('t' == reg_name)
+		return (regs.reg_t);
+
+	if ('v' == reg_name)
+		return (regs.reg_v);
+
+	return (NULL);
+}
 
 /**
  * put_in_register - put a new variable in register
@@ -27,29 +50,21 @@ int check(char *rightside)
  *
  * Return: void
 */
-void put_in_register(char *namevar, char *rightside)
+void put_in_register(char *name_var, int value, char reg_name)
 {
-	int i = 0, value;
+	int i;
+	reg *curr_reg = regs.get_reg(reg_name);
 
-	/*if value == 0 that is mean the rightside is not a number*/
-	if (check(rightside) == 0)
-		value = calc(rightside);
-	else
-		value = atoi(rightside);
+	if (!curr_reg)
+		return;
 
-	/*printf("valueeee: %d\n", value);*/
-
-	for (i = 0; i < 8; i++)
+	for (i = 0; curr_reg[i].name; i++)
 	{
-		if (regs.reg_s[i].var == NULL)
+		if (curr_reg[i].var == NULL)
 		{
-			regs.reg_s[i].var = namevar;
-			regs.reg_s[i].value = value;
-			printf("lw %s $t2\n\n", regs.reg_s[i].name);
-			/*printf("namevar: %s\n", regs.reg_s[i].name);*/
-			/*printf("value: %d\n", regs.reg_s[i].value);*/
-			/*printf("var: %s\n", regs.reg_s[i].var);*/
-			break;
+			curr_reg[i].var = name_var;
+			curr_reg[i].value = value;
+			return;
 		}
 	}
 }
