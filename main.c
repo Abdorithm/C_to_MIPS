@@ -129,7 +129,7 @@ int main(int argc, char *argv[])
 		cntr_line = getline(&content, &size, file);
 		counter++;
 		if (cntr_line > 0)
-			readline(content, counter);
+			decision(content, counter);
 
 	}
 	fclose(file);

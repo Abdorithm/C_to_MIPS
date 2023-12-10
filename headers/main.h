@@ -74,10 +74,23 @@ typedef struct instruction_s
 	int (*f)(int right, int left);
 } instruction_t;
 
+/**
+ * struct first_s - this struct determine the process by the first word(string)
+ * @first : the first word
+ * @f : the fucntion to handle the process(condition , loop, etc)
+ * Description: execute the right function
+ */
+
+typedef struct first_s
+{
+	char *first;
+	int (*f)(char *arr);
+} first_t;
+
 extern all_reg regs;
 
 /* functions */
-void readline(char *content, unsigned int counter);
+void decision(char *content, unsigned int counter);
 void put_in_register(char *namevar, int value, char reg_name);
 reg *get_reg(char reg_name);
 char **get_argv(char *line);

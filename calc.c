@@ -158,8 +158,9 @@ int calc(char *rightside)
 		{"-", sub},
 		{NULL, NULL}
 	};
-
-	char **separateline = get_argv(rightside);
+	char *lhs = strtok(rightside, " =");
+	char *rhs = strtok(NULL, " ;");
+	char **separateline = get_argv(rhs);
 	int value = 0;
 	expr_t *head = fill_linked_list(separateline);
 
@@ -167,7 +168,7 @@ int calc(char *rightside)
 	value = do_priority(opst, head);
 	print_list(head);
 	free_list(head);
-
+	put_in_register(lhs, value, 's');
 	return (value);
 }
 
