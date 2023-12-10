@@ -21,15 +21,14 @@ int do_priority(instruction_t opst[], expr_t *head)
 			{
 				value = opst[i].f(atoi(tmp->prev->data), atoi(tmp->next->data));
 
-				tmp->data = tostring(value); 
+				tmp->data = tostring(value);
 				if (tmp->prev->prev)
 				{
-					tmp->prev = tmp->prev->prev;
-					free_node(tmp->prev->next);
+					tmp->prev = tmp->prev->prev, free_node(tmp->prev->next);
 					tmp->prev->next = tmp;
 				}
 				else
-			{
+				{
 					free_node(tmp->prev);
 					tmp->prev = NULL;
 					head = tmp;
@@ -37,19 +36,16 @@ int do_priority(instruction_t opst[], expr_t *head)
 
 				if (tmp->next->next)
 				{
-					tmp->next = tmp->next->next;
-					free_node(tmp->next->prev);
+					tmp->next = tmp->next->next, free_node(tmp->next->prev);
 					tmp->next->prev = tmp;
 				}
 				else
-			{
-					free_node(tmp->next);
-					tmp->next = NULL;
+				{
+					free_node(tmp->next), tmp->next = NULL;
 				}
 			}
 			tmp = tmp->next;
 		} /* print_list(head); */
-
 		i++;
 	}
 	return (value);

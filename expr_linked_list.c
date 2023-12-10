@@ -20,19 +20,15 @@ expr_t *fill_linked_list(char **expression)
 		expr_t *new_node = malloc(sizeof(expr_t));
 
 		if (!new_node)
-		{
-			fprintf(stderr, "Error: Memory allocation failed.\n");
-			exit(EXIT_FAILURE);
-		}
+			malloc_failed();
 
 		/* Allocate memory for the data and copy the string */
 		new_node->data = strdup(expression[i]);
 		if (!new_node->data)
 		{
 			free_list(head);
-			fprintf(stderr, "Error: Memory allocation for string failed.\n");
-			exit(EXIT_FAILURE);
-		}
+			malloc_failed();
+	}
 
 		/* Set the pointers of the node */
 		new_node->prev = current;

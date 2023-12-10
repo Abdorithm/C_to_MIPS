@@ -45,7 +45,8 @@ int count_tokens(const char *str, const char *delim)
 				expres++;
 			}
 		}
-		/* this line for an edge case like this
+		/*
+		 * this line for an edge case like this
 		 * var = x
 		 * without it the number of tokens will be 2
 		 * but as you see it has to be 3
@@ -55,7 +56,7 @@ int count_tokens(const char *str, const char *delim)
 
 		/* count the expressions to make room for it later */
 		count += expres;
-	
+
 		token = strtok(NULL, delim);
 	}
 	free(str_copy);
@@ -108,7 +109,9 @@ char **get_argv(char *line)
 /**
  * slice_token - slice a given token by the expression in it
  *
- * 
+ * @token: the addrss of the token to be sliced
+ *
+ * Return: a pointer to the new slice of token
  */
 char *slice_token(char **token)
 {
@@ -121,7 +124,7 @@ char *slice_token(char **token)
 
 	if (slice_size == 0)
 		slice_size++;
-		
+
 	new_slice = malloc(sizeof(char) * (slice_size + 1));
 
 	/* need to free before exist to be implemented */

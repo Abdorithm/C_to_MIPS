@@ -1,7 +1,7 @@
 #include "headers/main.h"
 #include "headers/init.h"
 
-all_reg regs = INIT_REGS;
+info_t info = INIT_REGS;
 /**
  * main - entry point
  * @argc: number of arguments
@@ -11,46 +11,38 @@ all_reg regs = INIT_REGS;
  */
 int main(int argc, char *argv[])
 {
-	char *content;
-	notUsed char **tokens;
-	FILE *file;
 	size_t size = 0;
 	ssize_t cntr_line = 1;
-	unsigned int counter = 0;
 
 	/*check if the file name is already exist or not*/
 	if (argc != 2)
 	{
-                printf("Usage: ./mipsify <file name>\n");
+		printf("Usage: ./mipsify <file name>\n");
 		exit(EXIT_FAILURE);
 	}
-	file = fopen(argv[1], "r");
-	if (!file)
+	info.file = fopen(argv[1], "r");
+	if (!info.file)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
 	/*read line by line*/
-        while (cntr_line > 0)
+	while (cntr_line > 0)
 	{
-		content = NULL;
-		cntr_line = getline(&content, &size, file);
+		cntr_line = getline(&info.content, &size, info.file);
 		if (cntr_line == EOF)
 		{
-			free(content);
+			free(info.content);
 			break;
 		}
-		tokens = get_argv(content);
-		free_2d(tokens);
-		counter++;
+		info.tokens = get_argv(info.content);
+		free_2d(info.tokens);
 
 	}
 	/* exist */
-	fclose(file);
-	/*
+	free_all();
 	overview();
 	credits();
-	*/
 
 	return (0);
 }

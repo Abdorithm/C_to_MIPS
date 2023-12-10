@@ -41,7 +41,7 @@ typedef struct reg_s
 } reg;
 
 /**
- * struct all_reg_s - ...
+ * struct info_s - ...
  * @reg_s: Stack-allocated array for registers of type s
  * @reg_a: Stack-allocated array for registers of type a
  * @reg_t: Stack-allocated array for registers of type t
@@ -51,7 +51,7 @@ typedef struct reg_s
  * @reg_name: name of the register to return it's array
  * Description: The structure of various MIPS registers
  */
-typedef struct all_reg_s
+typedef struct info_s
 {
 	reg reg_s[9];
 	reg reg_a[5];
@@ -59,7 +59,11 @@ typedef struct all_reg_s
 	reg reg_v[3];
 	reg zero;
 	reg * (*get_reg)(char);
-}  all_reg;
+	char *content;
+	char **tokens;
+	FILE *file;
+
+}  info_t;
 
 /**
  * struct instruction_s - opcode and its function
@@ -74,7 +78,7 @@ typedef struct instruction_s
 	int (*f)(int right, int left);
 } instruction_t;
 
-extern all_reg regs;
+extern info_t info;
 
 /* functions */
 void put_in_register(char *namevar, int value, char reg_name);
@@ -93,6 +97,7 @@ void free_list(expr_t *head);
 void overview(void);
 void credits(void);
 void malloc_failed(void);
+void free_all(void);
 
 /* Operations */
 int calc(char *rightside);

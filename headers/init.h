@@ -36,7 +36,10 @@
             {"$v1", 0, NULL} \
         }, \
         {"$zero", 0, NULL}, \
-        get_reg \
+        get_reg, \
+	NULL, \
+	NULL, \
+	NULL \
     }
 
 #endif

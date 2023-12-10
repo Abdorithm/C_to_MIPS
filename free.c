@@ -54,3 +54,16 @@ void free_node(expr_t *node)
 	free(node);
 }
 
+/**
+ * free_all - free every thing before exit
+ *
+ */
+void free_all(void)
+{
+	free(info.content);
+	free_2d(info.tokens);
+	fclose(info.file);
+
+}
+
+
