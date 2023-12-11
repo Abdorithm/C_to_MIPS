@@ -9,7 +9,11 @@ We are six students at the Faculty of Engineering in Port Said, studying Softwar
 ## Compileing
 utilize this command to compile the code.
 ```bash
-gcc -Wall -Wextra -Werror -pedantic  -std=gnu89  headers/main.h  \*.c  -o mipsify -g
+gcc -Wall -Wextra -Werror -pedantic  -std=gnu89  headers/main.h  *.c  -o mipsify -g
+```
+or you can just type
+```bash
+make
 ```
 
 ## Usage instructions

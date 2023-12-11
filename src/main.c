@@ -11,7 +11,7 @@ info_t info = INIT_INF;
  */
 int main(int argc, char *argv[])
 {
-	size_t len = 0;
+	size_t len = 1;
 	ssize_t read = 1;
 	size_t i, j;
 
