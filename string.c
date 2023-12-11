@@ -27,7 +27,7 @@ char *tostring(int number)
  */
 int count_tokens(const char *str, const char *delim)
 {
-	int count = 0, expres, i;
+	size_t count = 0, expres, i;
 	char *token, *str_copy;
 
 
@@ -66,44 +66,39 @@ int count_tokens(const char *str, const char *delim)
 /**
  * get_argv - split the line to multple strings
  *
- * @line: the line to tokenize
- *
- * Return: a pointer to the strings on success and NULL on failure
+ * Return: the number of tokens allocated
  */
-char **get_argv(char *line)
+size_t get_argv(void)
 {
 	char *token;
-	char **arg = NULL;
-	int tokens_cnt;
+	size_t tokens_cnt;
 	int cnt = 0;
 
 
-	tokens_cnt = count_tokens(line, " \t\n");
+	tokens_cnt = count_tokens(info.curr_line, " \t\n");
 
 	if (!tokens_cnt)
 	{
-		free(line);
-		return (NULL);
+		free(info.curr_line);
+		return (0);
 	}
 
-	arg = malloc(sizeof(char *) * (tokens_cnt + 1));
-	if (arg == NULL)
-	{
-		perror("error: allocating arg\n");
-		free(line);
-		exit(EXIT_FAILURE);
-	}
-	token = strtok(line, " \t\n");
+	info.curr_tokens = malloc(sizeof(char *) * (tokens_cnt + 1));
+	if (info.curr_tokens == NULL)
+		malloc_failed();
+
+	token = strtok(info.curr_line, " \t\n");
 	while (token)
 	{
 		while (*token)
-			arg[cnt++] = slice_token(&token);
+			info.curr_tokens[cnt++] = slice_token(&token);
 
 		token = strtok(NULL, " \t\n");
 	}
-	arg[tokens_cnt] = NULL;
-	free(line);
-	return (arg);
+	info.curr_tokens[tokens_cnt] = NULL;
+	free(info.curr_line);
+	info.curr_line = NULL;
+	return (tokens_cnt);
 }
 
 /**
@@ -115,8 +110,8 @@ char **get_argv(char *line)
  */
 char *slice_token(char **token)
 {
-	size_t slice_size;
-	char *new_slice;
+	size_t slice_size = 0;
+	char *new_slice = NULL;
 
 	slice_size = strcspn(*token, ";,(){}&|<<*/%+-=");
 
@@ -132,6 +127,7 @@ char *slice_token(char **token)
 		malloc_failed();
 
 	strncpy(new_slice, *token, slice_size);
+	new_slice[slice_size] = '\0';
 	*token += slice_size;
 	return (new_slice);
 }

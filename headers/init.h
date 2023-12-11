@@ -37,6 +37,8 @@
         }, \
         {"$zero", 0, NULL}, \
         get_reg, \
+	0, \
+	NULL, \
 	NULL, \
 	NULL, \
 	NULL \

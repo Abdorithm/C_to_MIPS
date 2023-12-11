@@ -40,6 +40,12 @@ typedef struct reg_s
 	char *var;
 } reg;
 
+typedef struct line_s
+{
+	size_t size;
+	char **tokens;
+} line_t;
+
 /**
  * struct info_s - ...
  * @reg_s: Stack-allocated array for registers of type s
@@ -59,8 +65,10 @@ typedef struct info_s
 	reg reg_v[3];
 	reg zero;
 	reg * (*get_reg)(char);
-	char *content;
-	char **tokens;
+	size_t line_cnt;	
+	char *curr_line;
+	char **curr_tokens;
+	line_t **all_lines;
 	FILE *file;
 
 }  info_t;
@@ -83,7 +91,7 @@ extern info_t info;
 /* functions */
 void put_in_register(char *namevar, int value, char reg_name);
 reg *get_reg(char reg_name);
-char **get_argv(char *line);
+size_t get_argv(void);
 char *slice_token(char **token);
 int count_tokens(const char *str, const char *del);
 int expr_check(char ch);
@@ -98,6 +106,7 @@ void overview(void);
 void credits(void);
 void malloc_failed(void);
 void free_all(void);
+void add_line(void);
 
 /* Operations */
 int calc(char *rightside);

@@ -58,7 +58,7 @@ int do_priority(instruction_t opst[], expr_t *head)
  * Return: calculated value
  * Description: ...
  */
-int calc(char *rightside)
+int calc(notUsed char *rightside)
 {
 	instruction_t opst[] = {
 		{"<<", shift_left},
@@ -71,11 +71,13 @@ int calc(char *rightside)
 		{NULL, NULL}
 	};
 
-	char **separateline = get_argv(rightside);
 	int value = 0;
-	expr_t *head = fill_linked_list(separateline);
+	/*
+	 * i already put the line into tokens with the '=' in there
+	 * fill_linked_list need to be modified to handle this.
+	 */
+	expr_t *head = fill_linked_list(info.curr_tokens);
 
-	free_2d(separateline); /* we don't need it anymore! */
 	value = do_priority(opst, head);
 	print_list(head);
 	free_list(head);

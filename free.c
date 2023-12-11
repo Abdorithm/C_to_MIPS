@@ -19,6 +19,9 @@ void free_2d(char **array)
 {
 	int i = 0;
 
+	if (!array)
+		return;
+
 	while (array[i])
 		free(array[i++]);
 	free(array);
@@ -60,8 +63,16 @@ void free_node(expr_t *node)
  */
 void free_all(void)
 {
-	free(info.content);
-	free_2d(info.tokens);
+	size_t i;
+
+	free(info.curr_line);
+	free_2d(info.curr_tokens);
+	for (i = 0; i < info.line_cnt; i++)
+	{
+		free_2d(info.all_lines[i]->tokens);
+		free(info.all_lines[i]);
+	}
+	free(info.all_lines);
 	fclose(info.file);
 
 }

@@ -11,8 +11,9 @@ info_t info = INIT_INF;
  */
 int main(int argc, char *argv[])
 {
-	size_t size = 0;
-	ssize_t cntr_line = 1;
+	size_t len = 0;
+	ssize_t read = 1;
+	size_t i, j;
 
 	/*check if the file name is already exist or not*/
 	if (argc != 2)
@@ -27,13 +28,19 @@ int main(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 	/*read line by line*/
-	while (cntr_line > 0)
+	while (read)
 	{
-		cntr_line = getline(&info.content, &size, info.file);
-		if (cntr_line == EOF)
+		read = getline(&info.curr_line, &len, info.file);
+		if (read == EOF)
 			break;
-
-		info.tokens = get_argv(info.content);
+		add_line();
+		/* just for testing */
+		for (i = 0; i < info.line_cnt; i++)
+		{
+			for (j = 0; j < info.all_lines[i]->size; j++)
+				printf("%s ", info.all_lines[i]->tokens[j]);
+			printf("\n\n");
+		}
 	}
 	/* exist */
 	free_all();
