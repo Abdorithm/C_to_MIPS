@@ -40,12 +40,10 @@ int main(int argc, char *argv[])
 	{
 		for (j = 0; j < info.all_lines[i]->size; j++)
 			printf("%s ", info.all_lines[i]->tokens[j]);
-		printf("\n\n");
+		printf("\n");
 	}
 	/* exist */
 	free_all();
-	overview();
-	credits();
 
 	return (0);
 }

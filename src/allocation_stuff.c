@@ -7,9 +7,10 @@
  */
 void add_line(void)
 {
-	line_t *line = NULL;
-	line_t **new_block = NULL;
+	line_t *line;
+	line_t **new_block;
 
+	/* setup the new line */
 	line = malloc(sizeof(line_t));
 	if (!line)
 		malloc_failed();
@@ -20,17 +21,25 @@ void add_line(void)
 		free(line);
 		return;
 	}
-	info.line_cnt++;
 	line->tokens = info.curr_tokens;
 	info.curr_tokens = NULL;
 
-	new_block = malloc(sizeof(line_t *) * (info.line_cnt + 1));
-	if (!new_block)
-		malloc_failed();
+	if (!info.line_cnt)
+		info.all_lines = malloc(sizeof(line_t *));
+	else if (__builtin_popcount(info.line_cnt) == 1)
+	{
 
-	memcpy(new_block, info.all_lines, sizeof(line_t *) * (info.line_cnt - 1));
-	free(info.all_lines);
-	new_block[info.line_cnt - 1] = line;
-	new_block[info.line_cnt] = NULL;
-	info.all_lines = new_block;
+		new_block = malloc(sizeof(line_t *) * (info.line_cnt * 2));
+		/* just for testing */
+		printf("WEEe a new Block Memory, Line: %lu\n", info.line_cnt);
+		if (!new_block)
+			malloc_failed();
+		memcpy(new_block, info.all_lines, sizeof(line_t *) * (info.line_cnt));
+		free(info.all_lines);
+		info.all_lines = new_block;
+	}
+
+	info.all_lines[info.line_cnt] = line;
+	info.line_cnt++;
+
 }
