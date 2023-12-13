@@ -34,7 +34,7 @@ void add_line(void)
 		new_block[i] = malloc(sizeof(line_t));
 		if (!new_block[i])
 			malloc_failed();
-		mempcpy(new_block[i], info.all_lines[i], sizeof(line_t));
+		memcpy(new_block[i], info.all_lines[i], sizeof(line_t));
 		free(info.all_lines[i]);
 	}
 	free(info.all_lines);

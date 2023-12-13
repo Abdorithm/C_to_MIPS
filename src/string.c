@@ -64,7 +64,7 @@ int count_tokens(const char *str, const char *delim)
 }
 
 /**
- * get_argv - split the line to multple strings
+ * get_argv - split the line to multiple tokens
  *
  * Return: the number of tokens allocated
  */
