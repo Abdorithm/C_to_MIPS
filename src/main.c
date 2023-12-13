@@ -34,13 +34,13 @@ int main(int argc, char *argv[])
 		if (read == EOF)
 			break;
 		add_line();
-		/* just for testing */
-		for (i = 0; i < info.line_cnt; i++)
-		{
-			for (j = 0; j < info.all_lines[i]->size; j++)
-				printf("%s ", info.all_lines[i]->tokens[j]);
-			printf("\n\n");
-		}
+	}
+	/* just for testing */
+	for (i = 0; i < info.line_cnt; i++)
+	{
+		for (j = 0; j < info.all_lines[i]->size; j++)
+			printf("%s ", info.all_lines[i]->tokens[j]);
+		printf("\n\n");
 	}
 	/* exist */
 	free_all();

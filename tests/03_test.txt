@@ -1,2 +1,12 @@
-for(int i=0;i<n;i++){var=x*4}
-while (int j = 0; j < m; j++);
+for(int i=0;i<n;i++) 
+{
+	var=x*4
+}
+for (int j = 0; j < m; j++)
+{
+	for (k = 0; k < k; k++)
+	{
+		a *= 3;
+		m += 4;
+	}
+}

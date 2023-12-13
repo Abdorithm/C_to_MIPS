@@ -9,7 +9,6 @@ void add_line(void)
 {
 	line_t *line = NULL;
 	line_t **new_block = NULL;
-	size_t i;
 
 	line = malloc(sizeof(line_t));
 	if (!line)
@@ -29,14 +28,7 @@ void add_line(void)
 	if (!new_block)
 		malloc_failed();
 
-	for (i = 0; i < info.line_cnt - 1; i++)
-	{
-		new_block[i] = malloc(sizeof(line_t));
-		if (!new_block[i])
-			malloc_failed();
-		memcpy(new_block[i], info.all_lines[i], sizeof(line_t));
-		free(info.all_lines[i]);
-	}
+	memcpy(new_block, info.all_lines, sizeof(line_t *) * (info.line_cnt - 1));
 	free(info.all_lines);
 	new_block[info.line_cnt - 1] = line;
 	new_block[info.line_cnt] = NULL;
