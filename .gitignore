@@ -1,0 +1,4 @@
+.vscode
+#valgrind files
+vgcore*
+build

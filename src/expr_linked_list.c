@@ -17,22 +17,18 @@ expr_t *fill_linked_list(char **expression)
 	for (i = 0; expression[i]; ++i)
 	{
 		/* Create a new node */
-		expr_t *new_node = (expr_t *)malloc(sizeof(expr_t));
+		expr_t *new_node = malloc(sizeof(expr_t));
 
 		if (!new_node)
-		{
-			fprintf(stderr, "Error: Memory allocation failed.\n");
-			exit(EXIT_FAILURE);
-		}
+			malloc_failed();
 
 		/* Allocate memory for the data and copy the string */
 		new_node->data = strdup(expression[i]);
 		if (!new_node->data)
 		{
-			fprintf(stderr, "Error: Memory allocation for string failed.\n");
-			free(new_node);
-			exit(EXIT_FAILURE);
-		}
+			free_list(head);
+			malloc_failed();
+	}
 
 		/* Set the pointers of the node */
 		new_node->prev = current;
@@ -61,25 +57,11 @@ void print_list(expr_t *head)
 
 	while (current != NULL)
 	{
-		printf("-> %s\n", current->data);
+		printf("%s", current->data);
+		if (current->next)
+			printf(" -> ");
+		else
+			printf("\n");
 		current = current->next;
-	}
-}
-
-/**
- * free_list - ...
- * @head: ...
- */
-void free_list(expr_t *head)
-{
-	expr_t *current = head;
-	expr_t *temp;
-
-	while (current)
-	{
-		temp = current;
-		current = current->next;
-		free(temp->data);
-		free(temp);
 	}
 }
