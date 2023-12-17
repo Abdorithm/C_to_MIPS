@@ -1,4 +1,9 @@
+int b = 4;
+int a = 3;
 if (a > b)
 {
-	a = b + 3;
+	int c = b + 3;
 }
+a = 2
+> = 3
+b = 4

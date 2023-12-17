@@ -9,7 +9,11 @@ We are six students at the Faculty of Engineering in Port Said, studying Softwar
 ## Compileing
 utilize this command to compile the code.
 ```bash
-gcc -Wall -Wextra -Werror -pedantic  -std=gnu89  headers/main.h  \*.c  -o mipsify -g
+gcc -Wall -Wextra -Werror -pedantic  -std=gnu89  headers/main.h  *.c  -o mipsify -g
+```
+or you can just type
+```bash
+make
 ```
 
 ## Usage instructions
@@ -49,5 +53,5 @@ We have made some assumptions in the code conversion to facilitate the process. 
 2. "muli" Operation:
    - Assume that there is an operation called "muli" that multiplies a constant by a value already present in memory.
      ```assembly
-     mul $s0, $s1, 5
+     muli $s0, $s1, 5
      ```

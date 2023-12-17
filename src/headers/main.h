@@ -41,17 +41,34 @@ typedef struct reg_s
 } reg;
 
 /**
- * struct all_reg_s - ...
+ * struct line_s - store a whole line
+ *
+ * @size: the number of tokens
+ * @tokens: the tokens it self
+ */
+typedef struct line_s
+{
+	size_t size;
+	char **tokens;
+} line_t;
+
+/**
+ * struct info_s - ...
  * @reg_s: Stack-allocated array for registers of type s
  * @reg_a: Stack-allocated array for registers of type a
  * @reg_t: Stack-allocated array for registers of type t
  * @reg_v: Stack-allocated array for registers of type v
  * @zero: Register $ZERO
+ * @get_reg: a pointer function so you can access it through info
+ * @line_cnt: how many lines are there
+ * @curr_line: current line read
+ * @curr_tokens: current tokens
+ * @all_lines: all the lines in one place
+ * @file: the file we read
  *
- * @reg_name: name of the register to return it's array
  * Description: The structure of various MIPS registers
  */
-typedef struct all_reg_s
+typedef struct info_s
 {
 	reg reg_s[9];
 	reg reg_a[5];
@@ -59,7 +76,14 @@ typedef struct all_reg_s
 	reg reg_v[3];
 	reg zero;
 	reg * (*get_reg)(char);
-}  all_reg;
+	size_t line_cnt;
+	char *curr_line;
+	char **curr_tokens;
+	line_t **all_lines;
+	FILE *file;
+	int number_jump;
+
+}  info_t;
 
 /**
  * struct instruction_s - opcode and its function
@@ -74,14 +98,28 @@ typedef struct instruction_s
 	int (*f)(int right, int left);
 } instruction_t;
 
-extern all_reg regs;
+/**
+ * struct first_s - this struct determine the process by the first word(string)
+ * @first : the first word
+ * @f : the fucntion to handle the process(condition , loop, etc)
+ * Description: execute the right function
+ */
+
+typedef struct first_s
+{
+	char *first;
+	int (*f)(size_t num_line);
+} first_t;
+
+extern info_t info;
 
 /* functions */
-void readline(char *content, unsigned int counter);
 void put_in_register(char *namevar, int value, char reg_name);
 reg *get_reg(char reg_name);
-char **get_argv(char *line);
+size_t get_argv(void);
+char *slice_token(char **token);
 int count_tokens(const char *str, const char *del);
+int expr_check(char ch);
 char *tostring(int number);
 void free_2d(char **array);
 expr_t *fill_linked_list(char **expression);
@@ -89,6 +127,11 @@ void print_list(expr_t *head);
 int do_priority(instruction_t opst[], expr_t *head);
 void free_node(expr_t *node);
 void free_list(expr_t *head);
+void overview(void);
+void credits(void);
+void malloc_failed(void);
+void free_all(void);
+void add_line(void);
 
 /* Operations */
 int calc(char *rightside);
@@ -99,5 +142,9 @@ int divs(int right, int left);
 int mod(int right, int left);
 int shift_left(int right, int left);
 int shift_right(int right, int left);
+
+/* Instructions Condition*/
+int condition(size_t line_num);
+size_t line_numb(void);
 
 #endif
