@@ -81,8 +81,8 @@ typedef struct info_s
 	char **curr_tokens;
 	line_t **all_lines;
 	FILE *file;
-	int number_jump;
-
+	int j_jumber;
+	int k_jumber;
 }  info_t;
 
 /**
@@ -146,5 +146,9 @@ int shift_right(int right, int left);
 /* Instructions Condition*/
 int condition(size_t line_num);
 size_t line_numb(void);
+int check_numbers_condtions(size_t line_num);
+int if_condition(size_t line_num);
+size_t else_or_elseif_condition(size_t line_num, int count_condtions);
+void print_condtion(size_t line_num, char *a, char *b, char *symbol, char *equal_symbol);
 
 #endif

@@ -1,74 +1,30 @@
 #include "headers/main.h"
 
 /**
- * if_condition - if condtions only
+ * check_else - check if there is an else condition
  * @line_num: line number
  * 
- * Return: the next line number after the if condition ends
+ * Return: 0 or 1 : if 0 no else condition, if 1 there is an else condition
 */
 
-int if_condition(size_t line_num)
+int check_numbers_condtions(size_t line_num)
 {
-	char *a= info.all_lines[line_num]->tokens[2];
-	char *b= info.all_lines[line_num]->tokens[4];
-	char *symbol= info.all_lines[line_num]->tokens[3];
-	char *equal_symbol= info.all_lines[line_num]->tokens[4];
-	int i = line_num, flag =0;
-
-	(void) i;
-	while(line_num < info.line_cnt)
-	{
-		char*begining_string = info.all_lines[line_num]->tokens[0]; 
-		if (strcmp(begining_string, "if") == 0)
-		{
-			if(strcmp(symbol,">") == 0)
-			{
-				if(strcmp(equal_symbol,"=") == 0)
-				{
-					b = info.all_lines[line_num]->tokens[5];
-					printf("   blt %s %s L%d\n", a, b, info.number_jump);
-				}
-				else
-					printf("   ble %s %s L%d\n", a, b, info.number_jump);
-			}
-			else if(strcmp(symbol,"<") == 0)
-			{
-				if(strcmp(equal_symbol,"=") == 0)
-				{
-					b = info.all_lines[line_num]->tokens[5];
-					printf("   bgt %s %s L%d\n", a, b, info.number_jump);
-				}
-				else
-					printf("   bge %s %s L%d\n", a, b, info.number_jump);
-			}
-			else if (strcmp(symbol,"!") == 0)
-			{
-				b = info.all_lines[line_num]->tokens[5];
-				printf("   beq %s %s L%d\n", a, b, info.number_jump);
-			}
-			else
-				printf("   bne %s %s L%d\n", a, b, info.number_jump);
-		}
-		else if (strcmp(begining_string,"}") == 0)
-		{
-			line_num++;
-			printf("L%d:\n", info.number_jump);
-			info.number_jump++;
-			break;
-		}
-		else if (strcmp(begining_string,"{") == 0 || flag == 1)
-		{
-			if(flag == 0)
-				flag=1;
-			else
-			{
-				printf("   Conddddtion\n");
-				/*decision(line_num);*/
-			}
-		}
-		line_num++;
-	}
-	return (line_num);
+	int cntr = 0;
+    while(line_num < info.line_cnt)
+    {
+        if (strcmp(info.all_lines[line_num]->tokens[0], "}") == 0)
+        {
+            line_num++;
+            if (line_num >= info.line_cnt)
+                return (cntr);
+            if (strcmp(info.all_lines[line_num]->tokens[0], "else") == 0)
+                cntr++;
+            else
+                return (cntr);
+        }
+        line_num++;
+    }
+    return (cntr);
 }
 
 /**
@@ -80,30 +36,15 @@ int if_condition(size_t line_num)
 
 int condition(size_t line_num)
 {
-	/*count_elseif = counts_elseif();
-	count_else = counts_else();*/
-	size_t new_line;
+	int count_condtions = 0;
+	size_t new_line = 0;
 
-	new_line = if_condition(line_num);
-	/*if(count_elseif == 0)
-	{
-		if(count_else == 0)
-		{
+ 	count_condtions = check_numbers_condtions(line_num);
 
-		   print_if_cond(line_num); 
-		}
-		else
-		{
-			prinf_else(line_num);
-		}
-	}
+	if(count_condtions == 0)
+		new_line = if_condition(line_num);
 	else
-	{
-	   while(count_elseif)
-	   {
-		 print_else_if();
-		 count_elseif --;
-	   }
-	}*/
+		new_line = else_or_elseif_condition(line_num, count_condtions);
+
 	return (new_line);
 }

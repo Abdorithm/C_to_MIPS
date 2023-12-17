@@ -13,8 +13,9 @@ int main(int argc, char *argv[])
 {
 	size_t len = 1;
 	ssize_t read = 1;
-	size_t i, j;
+	size_t i, j, test;
 
+	(void) i;
 	(void) j;
 	/*check if the file name is already exist or not*/
 	if (argc != 2)
@@ -37,22 +38,15 @@ int main(int argc, char *argv[])
 		add_line();
 	}
 	/* just for testing */
-<<<<<<< HEAD
-	condition(0);
-	for (i = 0; i < info.line_cnt; i++)
+	test = condition(0);
+	condition(test);
+	/*for (i = 0; i < info.line_cnt; i++)
 	{
-		/*decision(i);*/
-		/*for (j = 0; j < info.all_lines[i]->size; j++)
-			printf("%s ", info.all_lines[i]->tokens[j]);
-		printf("\n");*/
-=======
-	for (i = 0; i < info.line_cnt; i++)
-	{
+		decision(i);
 		for (j = 0; j < info.all_lines[i]->size; j++)
 			printf("%s ", info.all_lines[i]->tokens[j]);
-		printf("\n\n");
->>>>>>> ba60306 (simplified the add_line function)
-	}
+		printf("\n");
+	}*/
 	/* exist */
 	free_all();
 

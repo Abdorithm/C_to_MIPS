@@ -1,0 +1,12 @@
+if (a > b)
+{
+	int c = b + 3;
+}
+else if (a < b)
+{
+    int c = b + 3;
+}
+else
+{
+    int c = b + 3;
+}

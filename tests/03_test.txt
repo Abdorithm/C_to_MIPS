@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 	for(int i=0;i<n;i++) 
 	{
 		var=x*4;
@@ -194,8 +193,6 @@
 
 
 
-
-=======
 for(int i=0;i<n;i++) 
 {
 	var=x*4
@@ -208,4 +205,4 @@ for (int j = 0; j < m; j++)
 		m += 4;
 	}
 }
->>>>>>> ba60306 (simplified the add_line function)
+
