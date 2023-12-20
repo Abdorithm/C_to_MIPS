@@ -1,11 +1,29 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-#include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+
+/* defines */
+#define notUsed __attribute__((unused))
+
+/**
+ * struct expr_s - doubly linked list
+ * @data: value
+ * @prev: points to the previous node
+ * @next: points to the next node
+ *
+ * Description: doubly linked list node structure
+ * used to navigate through the expression
+ */
+typedef struct expr_s
+{
+	char *data;
+	struct expr_s *prev;
+	struct expr_s *next;
+} expr_t;
 
 /**
  * struct reg_s - Represents one register
@@ -30,15 +48,17 @@ typedef struct reg_s
  * @reg_v: Stack-allocated array for registers of type v
  * @zero: Register $ZERO
  *
+ * @reg_name: name of the register to return it's array
  * Description: The structure of various MIPS registers
  */
 typedef struct all_reg_s
 {
-	reg reg_s[8];
-	reg reg_a[4];
-	reg reg_t[10];
-	reg reg_v[2];
+	reg reg_s[9];
+	reg reg_a[5];
+	reg reg_t[11];
+	reg reg_v[3];
 	reg zero;
+	reg * (*get_reg)(char);
 }  all_reg;
 
 /**
@@ -48,37 +68,36 @@ typedef struct all_reg_s
  *
  * Description: opcode and its function
  */
-
 typedef struct instruction_s
 {
 	char *opcode;
 	int (*f)(int right, int left);
 } instruction_t;
 
-typedef struct first_s
-{
-	char *data;
-	int (*f)(char **arr);
-} first_t;
-
 extern all_reg regs;
 
 /* functions */
-void readline(char *content, unsigned int counter, FILE *file);
-void put_in_register(char *namevar, char *rightside);
-char **get_argv(char *strRead);
+void readline(char *content, unsigned int counter);
+void put_in_register(char *namevar, int value, char reg_name);
+reg *get_reg(char reg_name);
+char **get_argv(char *line);
+int count_tokens(const char *str, const char *del);
+char *tostring(int number);
+void free_2d(char **array);
+expr_t *fill_linked_list(char **expression);
+void print_list(expr_t *head);
+int do_priority(instruction_t opst[], expr_t *head);
+void free_node(expr_t *node);
+void free_list(expr_t *head);
 
-/*Opration*/
-int calc(char **arr);
-
+/* Operations */
+int calc(char *rightside);
 int add(int right, int left);
 int sub(int right, int left);
 int mul(int right, int left);
 int divs(int right, int left);
 int mod(int right, int left);
-int is_num(char *str);
-int find_value_reg(char *str);
-/*int ssl(int right, int left);*/
-/*int ssr(int right, int left);*/
+int shift_left(int right, int left);
+int shift_right(int right, int left);
 
 #endif
