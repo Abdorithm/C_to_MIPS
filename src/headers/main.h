@@ -53,7 +53,7 @@ typedef struct line_s
 } line_t;
 
 /**
- * struct info_s - ...
+ * struct all_reg_s - ...
  * @reg_s: Stack-allocated array for registers of type s
  * @reg_a: Stack-allocated array for registers of type a
  * @reg_t: Stack-allocated array for registers of type t
@@ -68,7 +68,7 @@ typedef struct line_s
  *
  * Description: The structure of various MIPS registers
  */
-typedef struct info_s
+typedef struct all_reg_s
 {
 	reg reg_s[9];
 	reg reg_a[5];
@@ -100,12 +100,11 @@ typedef struct instruction_s
 extern info_t info;
 
 /* functions */
+void readline(char *content, unsigned int counter);
 void put_in_register(char *namevar, int value, char reg_name);
 reg *get_reg(char reg_name);
-size_t get_argv(void);
-char *slice_token(char **token);
+char **get_argv(char *line);
 int count_tokens(const char *str, const char *del);
-int expr_check(char ch);
 char *tostring(int number);
 void free_2d(char **array);
 expr_t *fill_linked_list(char **expression);
@@ -113,11 +112,6 @@ void print_list(expr_t *head);
 int do_priority(instruction_t opst[], expr_t *head);
 void free_node(expr_t *node);
 void free_list(expr_t *head);
-void overview(void);
-void credits(void);
-void malloc_failed(void);
-void free_all(void);
-void add_line(void);
 
 /* Operations */
 int calc(char *rightside);
