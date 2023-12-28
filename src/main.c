@@ -37,9 +37,7 @@ int main(int argc, char *argv[])
 			break;
 		add_line();
 	}
-	/* just for testing */
-	test = condition(0);
-	condition(test);
+	decision(0);
 	/*for (i = 0; i < info.line_cnt; i++)
 	{
 		decision(i);
