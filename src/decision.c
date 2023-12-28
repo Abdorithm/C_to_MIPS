@@ -23,12 +23,10 @@ void decision(char *content, notUsed unsigned int counter)
 		{NULL, NULL}
 	};
 
-	first_word = strtok(content, " ");
-	rest_of_line = strtok(NULL, " ");
-	while (frst[i].first)
+	while (frst[num_line].first)
 	{
-		if (strcmp(frst[i].first, first_word))
-			frst[i].f(rest_of_line);
-		i++;
+		if (strcmp(frst[num_line].first, info.all_lines[num_line]->tokens[0]) == 0)
+			frst[num_line].f(num_line);
+		num_line++;
 	}
 }
