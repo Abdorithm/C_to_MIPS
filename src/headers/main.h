@@ -41,14 +41,31 @@ typedef struct reg_s
 } reg;
 
 /**
+ * struct line_s - store a whole line
+ *
+ * @size: the number of tokens
+ * @tokens: the tokens it self
+ */
+typedef struct line_s
+{
+	size_t size;
+	char **tokens;
+} line_t;
+
+/**
  * struct all_reg_s - ...
  * @reg_s: Stack-allocated array for registers of type s
  * @reg_a: Stack-allocated array for registers of type a
  * @reg_t: Stack-allocated array for registers of type t
  * @reg_v: Stack-allocated array for registers of type v
  * @zero: Register $ZERO
+ * @get_reg: a pointer function so you can access it through info
+ * @line_cnt: how many lines are there
+ * @curr_line: current line read
+ * @curr_tokens: current tokens
+ * @all_lines: all the lines in one place
+ * @file: the file we read
  *
- * @reg_name: name of the register to return it's array
  * Description: The structure of various MIPS registers
  */
 typedef struct all_reg_s
@@ -59,7 +76,13 @@ typedef struct all_reg_s
 	reg reg_v[3];
 	reg zero;
 	reg * (*get_reg)(char);
-}  all_reg;
+	size_t line_cnt;
+	char *curr_line;
+	char **curr_tokens;
+	line_t **all_lines;
+	FILE *file;
+
+}  info_t;
 
 /**
  * struct instruction_s - opcode and its function
@@ -74,7 +97,7 @@ typedef struct instruction_s
 	int (*f)(int right, int left);
 } instruction_t;
 
-extern all_reg regs;
+extern info_t info;
 
 /* functions */
 void readline(char *content, unsigned int counter);

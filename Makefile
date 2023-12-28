@@ -1,5 +1,5 @@
 CC := gcc
-CFLAGS := -Wall -Wextra -pedantic -std=gnu89
+CFLAGS := -Wall -Wextra -pedantic -g -std=gnu89
 LDFLAGS :=
 
 SRC_DIR := src

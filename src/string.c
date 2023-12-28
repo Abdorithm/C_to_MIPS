@@ -64,7 +64,7 @@ int count_tokens(const char *str, const char *delim)
 }
 
 /**
- * get_argv - split the line to multple strings
+ * get_argv - split the line to multiple tokens
  *
  * Return: the number of tokens allocated
  */
@@ -78,10 +78,7 @@ size_t get_argv(void)
 	tokens_cnt = count_tokens(info.curr_line, " \t\n");
 
 	if (!tokens_cnt)
-	{
-		free(info.curr_line);
 		return (0);
-	}
 
 	info.curr_tokens = malloc(sizeof(char *) * (tokens_cnt + 1));
 	if (info.curr_tokens == NULL)

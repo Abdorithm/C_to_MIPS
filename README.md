@@ -53,5 +53,5 @@ We have made some assumptions in the code conversion to facilitate the process. 
 2. "muli" Operation:
    - Assume that there is an operation called "muli" that multiplies a constant by a value already present in memory.
      ```assembly
-     mul $s0, $s1, 5
+     muli $s0, $s1, 5
      ```
