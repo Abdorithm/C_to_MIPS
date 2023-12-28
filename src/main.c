@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
 {
 	size_t len = 1;
 	ssize_t read = 1;
-	size_t i, j;
+	notUsed	size_t i, j;
 
 	/*check if the file name is already exist or not*/
 	if (argc != 2)
@@ -35,13 +35,17 @@ int main(int argc, char *argv[])
 			break;
 		add_line();
 	}
+	put_in_register("sum", 10, 's');
+	printf("%s, %d, %s\n", return_reg("sum").name, return_reg("sum").value, return_reg("sum").var);
 	/* just for testing */
+	/*
 	for (i = 0; i < info.line_cnt; i++)
 	{
 		for (j = 0; j < info.all_lines[i]->size; j++)
 			printf("%s ", info.all_lines[i]->tokens[j]);
 		printf("\n");
 	}
+	*/
 	/* exist */
 	free_all();
 

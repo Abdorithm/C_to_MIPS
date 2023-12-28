@@ -135,6 +135,7 @@ void credits(void);
 void malloc_failed(void);
 void free_all(void);
 void add_line(void);
+int valid_int(char *str);
 
 /* Conditions */
 int check_numbers_condtions(size_t line_num);
@@ -143,6 +144,7 @@ int if_condition(size_t line_num);
 void print_condtion(size_t line_num, char *a, char *b,
 		char *symbol, char *equal_symbol);
 size_t else_or_elseif_condition(size_t line_num, int count_condtions);
+reg return_reg(char *name);
 
 /* Operations */
 int calc(size_t line_number);

@@ -75,3 +75,45 @@ void put_in_register(char *name_var, int value, char reg_name)
 		}
 	}
 }
+
+/**
+ * get_reg - get the register
+ * @name: name of the register
+ *
+ * Return: the register
+ */
+reg return_reg(char *name)
+{
+	int i = 0;
+
+	while (info.reg_s[i].name != NULL)
+	{
+		if (strcmp(info.reg_s[i].var, name) == 0)
+			return (info.reg_s[i]);
+		i++;
+	}
+	return (info.reg_s[i]);
+}
+
+/**
+ * valid_int - check if a string is a valid integer
+ * @str: the string to check
+ *
+ * Return: 1 if it is otherwise 0
+ */
+
+int valid_int(char *str)
+{
+	int i = 0;
+
+	if (str == NULL)
+		return (0);
+
+	while (str[i])
+	{
+		if (str[i] < '0' || str[i] > '9')
+			return (0);
+		i++;
+	}
+	return (1);
+}
