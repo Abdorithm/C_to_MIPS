@@ -46,4 +46,4 @@ clean:
 
 # Add a phony target to force rebuilding 'mipsify'
 force: clean all
-
+install: all clean

@@ -29,7 +29,7 @@ int if_condition(size_t line_num)
 					printf("   blt %s %s L%d\n", a, b, info.j_jumber);
 				}
 				else
-					printf("   ble %s %s L%d\n", a, b, info.j_jumber);
+				printf("   ble %s %s L%d\n", a, b, info.j_jumber);
 			}
 			else if(strcmp(symbol,"<") == 0)
 			{
@@ -39,7 +39,7 @@ int if_condition(size_t line_num)
 					printf("   bgt %s %s L%d\n", a, b, info.j_jumber);
 				}
 				else
-					printf("   bge %s %s L%d\n", a, b, info.j_jumber);
+				printf("   bge %s %s L%d\n", a, b, info.j_jumber);
 			}
 			else if (strcmp(symbol,"!") == 0)
 			{
@@ -47,7 +47,7 @@ int if_condition(size_t line_num)
 				printf("   beq %s %s L%d\n", a, b, info.j_jumber);
 			}
 			else
-				printf("   bne %s %s L%d\n", a, b, info.j_jumber);
+			printf("   bne %s %s L%d\n", a, b, info.j_jumber);
 		}
 		else if (strcmp(begining_string,"}") == 0)
 		{
@@ -60,9 +60,9 @@ int if_condition(size_t line_num)
 		{
 			if(flag == 0)
 				flag=1;
-			else
-			{
-				printf("   Conddddtion\n");
+                        else
+                        {
+                                printf("   Conddddtion\n");
 				/*decision(line_num);*/
 			}
 		}
@@ -81,7 +81,7 @@ void print_condtion(size_t line_num, char *a, char *b, char *symbol, char *equal
 			printf("   blt %s %s L%d\n", a, b, info.j_jumber);
 		}
 		else
-			printf("   ble %s %s L%d\n", a, b, info.j_jumber);
+		printf("   ble %s %s L%d\n", a, b, info.j_jumber);
 	}
 	else if(strcmp(symbol,"<") == 0)
 	{
@@ -91,7 +91,7 @@ void print_condtion(size_t line_num, char *a, char *b, char *symbol, char *equal
 			printf("   bgt %s %s L%d\n", a, b, info.j_jumber);
 		}
 		else
-			printf("   bge %s %s L%d\n", a, b, info.j_jumber);
+		printf("   bge %s %s L%d\n", a, b, info.j_jumber);
 	}
 	else if (strcmp(symbol,"!") == 0)
 	{
@@ -99,7 +99,7 @@ void print_condtion(size_t line_num, char *a, char *b, char *symbol, char *equal
 		printf("   beq %s %s L%d\n", a, b, info.j_jumber);
 	}
 	else
-		printf("   bne %s %s L%d\n", a, b, info.j_jumber);
+	printf("   bne %s %s L%d\n", a, b, info.j_jumber);
 }
 
 /**
@@ -161,9 +161,9 @@ size_t else_or_elseif_condition(size_t line_num, int count_condtions)
 			if(flag == 0)
 				flag=1;
 			else
-			{
-				printf("   Conddddtion\n");
-				/*decision(line_num);*/
+                        {
+                                printf("   Conddddtion\n");
+                                /*decision(line_num);*/
 			}
 		}
 		line_num++;

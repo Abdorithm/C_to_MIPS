@@ -41,6 +41,19 @@ typedef struct reg_s
 } reg;
 
 /**
+ * struct first_s - this struct determine the process by the first word(string)
+ * @first : the first word
+ * @f : the fucntion to handle the process(condition , loop, etc)
+ * Description: execute the right function
+ */
+
+typedef struct first_s
+{
+	char *first;
+	int (*f)(size_t num_line);
+} first_t;
+
+/**
  * struct line_s - store a whole line
  *
  * @size: the number of tokens
@@ -53,7 +66,7 @@ typedef struct line_s
 } line_t;
 
 /**
- * struct all_reg_s - ...
+ * struct info_s - ...
  * @reg_s: Stack-allocated array for registers of type s
  * @reg_a: Stack-allocated array for registers of type a
  * @reg_t: Stack-allocated array for registers of type t
@@ -68,7 +81,7 @@ typedef struct line_s
  *
  * Description: The structure of various MIPS registers
  */
-typedef struct all_reg_s
+typedef struct info_s
 {
 	reg reg_s[9];
 	reg reg_a[5];
@@ -77,6 +90,8 @@ typedef struct all_reg_s
 	reg zero;
 	reg * (*get_reg)(char);
 	size_t line_cnt;
+        int j_jumber;
+        int k_jumber;
 	char *curr_line;
 	char **curr_tokens;
 	line_t **all_lines;
@@ -100,21 +115,34 @@ typedef struct instruction_s
 extern info_t info;
 
 /* functions */
-void readline(char *content, unsigned int counter);
 void put_in_register(char *namevar, int value, char reg_name);
 reg *get_reg(char reg_name);
-char **get_argv(char *line);
+size_t get_argv(void);
+char *slice_token(char **token);
 int count_tokens(const char *str, const char *del);
 char *tostring(int number);
 void free_2d(char **array);
 expr_t *fill_linked_list(char **expression);
+int expr_check(char ch);
 void print_list(expr_t *head);
 int do_priority(instruction_t opst[], expr_t *head);
 void free_node(expr_t *node);
 void free_list(expr_t *head);
+void overview(void);
+void credits(void);
+void malloc_failed(void);
+void free_all(void);
+void add_line(void);
+
+/* Conditions */
+int check_numbers_condtions(size_t line_num);
+int condition(size_t line_num);
+int if_condition(size_t line_num);
+void print_condtion(size_t line_num, char *a, char *b, char *symbol, char *equal_symbol);
+size_t else_or_elseif_condition(size_t line_num, int count_condtions);
 
 /* Operations */
-int calc(char *rightside);
+int calc(size_t line_number);
 int add(int right, int left);
 int sub(int right, int left);
 int mul(int right, int left);

@@ -7,26 +7,26 @@
  *
  * Return: void
  */
-void decision(char *content, notUsed unsigned int counter)
+void decision(notUsed char *content, notUsed unsigned int counter)
 {
-	char *first_word, *rest_of_line;
-	int i = 0;
-	first_t frst[] = {
+	int num_line = 0;
+	first_t first[] = {
 		{"int", calc},
 		{"long", calc},
-		/*
 		{"if", condition},
-		{"else", condition},
-		{"for", loop},
-		{"while", loop},
-		*/
+		/**
+		 *
+		 * {"for", loop},
+		 * {"while", loop},
+		 */
 		{NULL, NULL}
 	};
 
-	while (frst[num_line].first)
+	while (first[num_line].first)
 	{
-		if (strcmp(frst[num_line].first, info.all_lines[num_line]->tokens[0]) == 0)
-			frst[num_line].f(num_line);
+		if (strcmp(first[num_line].first, info.all_lines[num_line]->tokens[0]) == 0)
+			first[num_line + 1].f(num_line);
 		num_line++;
 	}
+
 }

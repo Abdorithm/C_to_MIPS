@@ -58,7 +58,7 @@ int do_priority(instruction_t opst[], expr_t *head)
  * Return: calculated value
  * Description: ...
  */
-int calc(notUsed char *rightside)
+int calc(notUsed size_t line_num)
 {
 	instruction_t opst[] = {
 		{"<<", shift_left},

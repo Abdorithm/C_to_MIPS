@@ -38,10 +38,12 @@
 	{"$zero", 0, NULL}, \
 	get_reg, \
 	0, \
+        1, \
+        1, \
 	NULL, \
 	NULL, \
 	NULL, \
-	NULL \
+	NULL, \
 }
 
 #endif
