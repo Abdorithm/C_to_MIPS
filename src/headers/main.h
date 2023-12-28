@@ -74,6 +74,8 @@ typedef struct line_s
  * @zero: Register $ZERO
  * @get_reg: a pointer function so you can access it through info
  * @line_cnt: how many lines are there
+ * @j_jumber: count the j_jumber
+ * @k_jumber: count the k_jumber
  * @curr_line: current line read
  * @curr_tokens: current tokens
  * @all_lines: all the lines in one place
@@ -90,8 +92,8 @@ typedef struct info_s
 	reg zero;
 	reg * (*get_reg)(char);
 	size_t line_cnt;
-        int j_jumber;
-        int k_jumber;
+	int j_jumber;
+	int k_jumber;
 	char *curr_line;
 	char **curr_tokens;
 	line_t **all_lines;
@@ -138,7 +140,8 @@ void add_line(void);
 int check_numbers_condtions(size_t line_num);
 int condition(size_t line_num);
 int if_condition(size_t line_num);
-void print_condtion(size_t line_num, char *a, char *b, char *symbol, char *equal_symbol);
+void print_condtion(size_t line_num, char *a, char *b,
+		char *symbol, char *equal_symbol);
 size_t else_or_elseif_condition(size_t line_num, int count_condtions);
 
 /* Operations */
