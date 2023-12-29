@@ -145,7 +145,7 @@ int condition(size_t line_num);
 int if_condition(size_t line_num);
 void print_condition(int eql, char *a, char *b, char *symbol);
 size_t else_or_elseif_condition(size_t line_num, int count_condtions);
-reg return_reg(char *name);
+reg return_reg(char *name, char reg_name);
 
 /* Operations */
 int calc(size_t line_number);
@@ -159,5 +159,5 @@ int shift_right(int right, int left);
 
 /* loops */
 void while_loop(size_t line_num);
-
+void for_loop(size_t line_num);
 #endif

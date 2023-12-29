@@ -1,8 +1,15 @@
 #include "headers/main.h"
 
+void num_operation(char *num)
+{
+	put_in_register(num, atoi(num), 't');
+	printf("sub %s %s %s\n", return_reg(num, 't').name, return_reg(num, 't').name, return_reg(num, 't').name);
+	printf("addi %s %s %d\n", return_reg(num, 't').name, return_reg(num, 't').name, return_reg(num, 't').value);
+}
+
 /**
  * whlie_loop - translate the while loop statement to mips code
- * 
+ *
  * @line_num : the number of the line
 */
 
@@ -23,16 +30,10 @@ void while_loop(size_t line_num)
 	}
 	a = info.all_lines[line_num]->tokens[2];
 	symbol = info.all_lines[line_num]->tokens[3];
-	/*
-	 if (valid_int(a))
-	 {
-		put int reg (atoi(a))
-		print sub r,r,r
-		addi r,r,a
-
-		and the same for b
-	 }
-	 */
+	if (valid_int(a))
+		num_operation(a);
+	if (valid_int(b))
+		num_operation(b);
 	printf("loop%d\n", info.loop_cnt);
 	print_condition(eql, a, b, symbol);
 	if (!strcmp("{", info.all_lines[line_num + 1]->tokens[0]))
@@ -40,20 +41,24 @@ void while_loop(size_t line_num)
 		i = line_num + 2;
 		while (strcmp("}", info.all_lines[i]->tokens[0]))
 		{
-			printf("\tany thing until abdo fix decision\n");
-			/*
-			 desicion();
-			 */
 			i++;
 		}
 	}
 	else
 	{
-		printf("\tany single line statement\n");
 		/*
 		 single line decision
 		 */
 	}
 	printf("\tJ loop%d\n", info.loop_cnt);
 	printf("Exit:\n");
+	info.loop_cnt++;
 }
+
+/**
+ * for_loop - translate the for loops statement to mips code
+ *
+ * @line_num : the number of the line
+*/
+
+

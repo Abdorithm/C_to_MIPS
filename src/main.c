@@ -36,6 +36,7 @@ int main(int argc, char *argv[])
 		add_line();
 	}
 	put_in_register("a", 0, 's');
+
 	while_loop(0);
 	/* just for testing */
 	/*

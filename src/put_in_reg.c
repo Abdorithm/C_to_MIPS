@@ -57,6 +57,7 @@ reg *get_reg(char reg_name)
  *
  * Return: void
 */
+
 void put_in_register(char *name_var, int value, char reg_name)
 {
 	int i;
@@ -82,14 +83,16 @@ void put_in_register(char *name_var, int value, char reg_name)
  *
  * Return: the register
  */
-reg return_reg(char *name)
+
+reg return_reg(char *name, char reg_name)
 {
 	int i = 0;
+	reg *curr_reg = info.get_reg(reg_name);
 
-	while (info.reg_s[i].name != NULL)
+	while (curr_reg[i].name != NULL)
 	{
-		if (strcmp(info.reg_s[i].var, name) == 0)
-			return (info.reg_s[i]);
+		if (strcmp(curr_reg[i].var, name) == 0)
+			return (curr_reg[i]);
 		i++;
 	}
 	return (info.reg_s[i]);
