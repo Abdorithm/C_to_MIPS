@@ -60,10 +60,9 @@ int if_condition(size_t line_num)
 		{
 			if(flag == 0)
 				flag=1;
-						else
+			else
 						{
 								printf("   Conddddtion\n");
-				/*decision(line_num);*/
 			}
 		}
 		line_num++;
@@ -71,35 +70,35 @@ int if_condition(size_t line_num)
 	return (line_num);
 }
 
-void print_condtion(size_t line_num, char *a, char *b, char *symbol, char *equal_symbol)
+/**
+ * print_condition - translate the condition into mips code
+ * 
+ * @a : the lhs of the condition
+ * @b : the rhs of the condition
+ * @symbol : the condition its self
+ * @eql : check if the condition has equal ">= , <="
+*/
+
+void print_condition(int eql, char *a, char *b, char *symbol)
 {
 	if(strcmp(symbol,">") == 0)
 	{
-		if(strcmp(equal_symbol,"=") == 0)
-		{
-			b = info.all_lines[line_num]->tokens[5];
-			printf("   blt %s %s L%d\n", a, b, info.j_jumber);
-		}
+		if(eql)
+			printf("\tblt %s %s L%d\n", return_reg(a).name, b, info.j_jumber);
 		else
-		printf("   ble %s %s L%d\n", a, b, info.j_jumber);
+		printf("\tble %s %s L%d\n", return_reg(a).name, b, info.j_jumber);
 	}
 	else if(strcmp(symbol,"<") == 0)
 	{
-		if(strcmp(equal_symbol,"=") == 0)
-		{
-			b = info.all_lines[line_num]->tokens[5];
-			printf("   bgt %s %s L%d\n", a, b, info.j_jumber);
-		}
+		if(eql)
+			printf("\tbgt %s %s L%d\n", return_reg(a).name, b, info.j_jumber);
 		else
-		printf("   bge %s %s L%d\n", a, b, info.j_jumber);
+		printf("\tbge %s %s L%d\n", return_reg(a).name, b, info.j_jumber);
 	}
 	else if (strcmp(symbol,"!") == 0)
-	{
-		b = info.all_lines[line_num]->tokens[5];
-		printf("   beq %s %s L%d\n", a, b, info.j_jumber);
-	}
+		printf("\tbeq %s %s L%d\n", return_reg(a).name, b, info.j_jumber);
 	else
-	printf("   bne %s %s L%d\n", a, b, info.j_jumber);
+	printf("\tbne %s %s L%d\n", return_reg(a).name, b, info.j_jumber);
 }
 
 /**
@@ -108,7 +107,7 @@ void print_condtion(size_t line_num, char *a, char *b, char *symbol, char *equal
  * 
  * Return: the next line number after the else or elseif condition ends
 */
-
+/*
 size_t else_or_elseif_condition(size_t line_num, int count_condtions)
 {
 	char *a, *b, *symbol, *equal_symbol, *begining_string;
@@ -163,10 +162,10 @@ size_t else_or_elseif_condition(size_t line_num, int count_condtions)
 			else
 						{
 								printf("   Conddddtion\n");
-								/*decision(line_num);*/
 			}
 		}
 		line_num++;
 	}
 	return (line_num);
 }
+*/

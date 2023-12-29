@@ -44,6 +44,7 @@
 	NULL, \
 	NULL, \
 	NULL, \
+	1\
 }
 
 #endif

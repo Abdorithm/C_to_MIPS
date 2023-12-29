@@ -13,8 +13,8 @@ void decision(notUsed char *content, notUsed unsigned int counter)
 	first_t first[] = {
 		{"int", calc},
 		{"long", calc},
+		/*
 		{"if", condition},
-		/**
 		 *
 		 * {"for", loop},
 		 * {"while", loop},

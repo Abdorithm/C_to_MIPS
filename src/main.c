@@ -35,8 +35,8 @@ int main(int argc, char *argv[])
 			break;
 		add_line();
 	}
-	put_in_register("sum", 10, 's');
-	printf("%s, %d, %s\n", return_reg("sum").name, return_reg("sum").value, return_reg("sum").var);
+	put_in_register("a", 0, 's');
+	while_loop(0);
 	/* just for testing */
 	/*
 	for (i = 0; i < info.line_cnt; i++)

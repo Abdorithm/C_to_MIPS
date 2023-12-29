@@ -35,6 +35,8 @@ int check_numbers_condtions(size_t line_num)
  * Return: void
  */
 
+
+/*
 int condition(size_t line_num)
 {
 	int count_condtions = 0;
@@ -49,3 +51,4 @@ int condition(size_t line_num)
 
 	return (new_line);
 }
+*/

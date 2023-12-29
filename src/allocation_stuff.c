@@ -31,7 +31,6 @@ void add_line(void)
 
 		new_block = malloc(sizeof(line_t *) * (info.line_cnt * 2));
 		/* just for testing */
-		printf("WEEe a new Memory Block, Line: %lu\n", info.line_cnt);
 		if (!new_block)
 			malloc_failed();
 		memcpy(new_block, info.all_lines, sizeof(line_t *) * (info.line_cnt));
