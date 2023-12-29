@@ -35,8 +35,13 @@ int main(int argc, char *argv[])
 			break;
 		add_line();
 	}
+	/*
 	put_in_register("a", 0, 's');
-
+	put_in_register("5", 5, 't');
+	put_in_register("10", 10, 't');
+	printf("%s %s %d\n",return_reg("5", 't').name, return_reg("5", 't').var ,return_reg("5", 't').value);
+	printf("%s %s %d\n",return_reg("10", 't').name, return_reg("10", 't').var ,return_reg("10", 't').value);
+	*/
 	while_loop(0);
 	/* just for testing */
 	/*

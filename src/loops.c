@@ -34,7 +34,7 @@ void while_loop(size_t line_num)
 		num_operation(a);
 	if (valid_int(b))
 		num_operation(b);
-	printf("loop%d\n", info.loop_cnt);
+	printf("loop%d:\n", info.loop_cnt);
 	print_condition(eql, a, b, symbol);
 	if (!strcmp("{", info.all_lines[line_num + 1]->tokens[0]))
 	{
@@ -46,6 +46,7 @@ void while_loop(size_t line_num)
 	}
 	else
 	{
+		printf("\tsingle line loop\n");
 		/*
 		 single line decision
 		 */

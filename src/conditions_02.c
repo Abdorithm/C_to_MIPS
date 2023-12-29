@@ -84,21 +84,21 @@ void print_condition(int eql, char *a, char *b, char *symbol)
 	if(strcmp(symbol,">") == 0)
 	{
 		if(eql)
-			printf("\tblt %s %s L%d\n", return_reg(a, 's').name, return_reg(b, 't').name, info.j_jumber);
+			printf("\tblt %s %s L%d\n", return_reg(a, 't').name, return_reg(b, 't').name, info.j_jumber);
 		else
-			printf("\tble %s %s L%d\n", return_reg(a, 's').name, return_reg(b, 't').name, info.j_jumber);
+			printf("\tble %s %s L%d\n", return_reg(a, 't').name, return_reg(b, 't').name, info.j_jumber);
 	}
 	else if(strcmp(symbol,"<") == 0)
 	{
 		if(eql)
-			printf("\tbgt %s %s L%d\n", return_reg(a, 's').name, return_reg(b, 't').name, info.j_jumber);
+			printf("\tbgt %s %s L%d\n", return_reg(a, 't').name, return_reg(b, 't').name, info.j_jumber);
 		else
-			printf("\tbge %s %s L%d\n", return_reg(a, 's').name, return_reg(b, 't').name, info.j_jumber);
+			printf("\tbge %s %s L%d\n", return_reg(a, 't').name, return_reg(b, 't').name, info.j_jumber);
 	}
 	else if (strcmp(symbol,"!") == 0)	
-		printf("\tbeq %s %s L%d\n", return_reg(a, 's').name, return_reg(b, 't').name, info.j_jumber);
+		printf("\tbeq %s %s L%d\n", return_reg(a, 't').name, return_reg(b, 't').name, info.j_jumber);
 	else
-		printf("\tbne %s %s L%d\n", return_reg(a, 's').name, return_reg(b, 't').name, info.j_jumber);
+		printf("\tbne %s %s L%d\n", return_reg(a, 't').name, return_reg(b, 't').name, info.j_jumber);
 }
 
 /**
