@@ -128,7 +128,7 @@ void free_2d(char **array);
 expr_t *fill_linked_list(char **expression);
 int expr_check(char ch);
 void print_list(expr_t *head);
-int do_priority(instruction_t opst[], expr_t *head);
+expr_t *do_priority(instruction_t opst[], expr_t *head);
 void free_node(expr_t *node);
 void free_list(expr_t *head);
 void overview(void);

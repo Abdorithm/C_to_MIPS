@@ -7,10 +7,10 @@
  *
  * Return: result
  */
-int do_priority(instruction_t opst[], expr_t *head)
+expr_t *do_priority(instruction_t opst[], expr_t *head)
 {
-	expr_t *tmp = head;
-	int i = 0, value = 0;
+	expr_t *tmp = head, *node_value = NULL;
+	int i = 0;
 
 	while (opst[i].opcode != NULL)
 	{
@@ -19,10 +19,9 @@ int do_priority(instruction_t opst[], expr_t *head)
 		{
 			if (strcmp(tmp->data, opst[i].opcode) == 0)
 			{
-				value = opst[i].f(atoi(tmp->prev->data), atoi(tmp->next->data));
-
-                                free(tmp->data);
-				tmp->data = tostring(value);
+				free(tmp->data);
+                                node_value = tmp;
+				node_value->data = tostring(opst[i].f(atoi(tmp->prev->data), atoi(tmp->next->data)));
 				if (tmp->prev->prev)
 				{
 					tmp->prev = tmp->prev->prev, free_node(tmp->prev->next);
@@ -49,7 +48,7 @@ int do_priority(instruction_t opst[], expr_t *head)
 		} /* print_list(head); */
 		i++;
 	}
-	return (value);
+	return (node_value);
 }
 
 /**
@@ -72,15 +71,19 @@ int calc(notUsed size_t line_num)
 		{NULL, NULL}
 	};
 
-	int value = 0;
+	expr_t* node_value = NULL;
+        int value;
 	/*
 	 * i already put the line into tokens with the '=' in there
 	 * fill_linked_list need to be modified to handle this.
 	 */
 	expr_t *head = fill_linked_list(info.all_lines[line_num]->tokens);
 
-	value = do_priority(opst, head);
-        print_list(head);
+	node_value = do_priority(opst, head);
+        if (node_value)
+                value = atoi(node_value->data);
+
+	print_list(head);
 	free_list(head);
 
 	return (value);
