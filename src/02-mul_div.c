@@ -34,10 +34,10 @@ void assign_args(char **first_arg, char **second_arg, int right, int left)
 
     if (*first_arg == NULL && *second_arg == NULL)
     {
-        printf("sub $t0 $t0 $t0\n"
-                "addi $t0 $t0 %d\n"
-                "sub $t1 $t1 $t1\n"
-                "addi $t1 $t1 %d\n", right, left);
+        printf("\tsub $t0 $t0 $t0\n"
+                "\taddi $t0 $t0 %d\n"
+                "\tsub $t1 $t1 $t1\n"
+                "\taddi $t1 $t1 %d\n", right, left);
         *first_arg = "$t0", *second_arg = "$t1";
     }
 }
@@ -61,11 +61,11 @@ int mul(int right, int left)
             info.reg_t[i].value = right * left;
             info.reg_t[i].var = "used";
             if (first_arg == NULL && second_arg != NULL)
-                printf("muli %s, %s, %i\n\n", info.reg_t[i].name, second_arg, right);
+                printf("\tmuli %s, %s, %i\n", info.reg_t[i].name, second_arg, right);
             else if (first_arg != NULL && second_arg == NULL)
-                printf("muli %s, %s, %i\n\n", info.reg_t[i].name, first_arg, left);
+                printf("\tmuli %s, %s, %i\n", info.reg_t[i].name, first_arg, left);
             else
-                printf("mul %s, %s, %s\n\n", info.reg_t[i].name, first_arg, second_arg);
+                printf("\tmul %s, %s, %s\n", info.reg_t[i].name, first_arg, second_arg);
             break;
         }
 	}
@@ -87,8 +87,8 @@ int divs(int right, int left)
 
     if (first_arg == NULL && second_arg != NULL)
     {
-        printf("sub $t0 $t0 $t0\n"
-                "addi $t0 $t0 %d\n", right);
+        printf("\tsub $t0 $t0 $t0\n"
+                "\taddi $t0 $t0 %d\n", right);
         first_arg = "$t0";
     }
 
@@ -99,9 +99,9 @@ int divs(int right, int left)
             info.reg_t[i].value = right / left;
             info.reg_t[i].var = "used";
             if (first_arg != NULL && second_arg == NULL)
-                printf("divi %s, %s, %i\n\n", info.reg_t[i].name, first_arg, left);
+                printf("\tdivi %s, %s, %i\n", info.reg_t[i].name, first_arg, left);
             else
-                printf("div %s, %s, %s\n\n", info.reg_t[i].name, first_arg, second_arg);
+                printf("\tdiv %s, %s, %s\n", info.reg_t[i].name, first_arg, second_arg);
             break;
         }
 	}

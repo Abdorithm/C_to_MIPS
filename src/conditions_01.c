@@ -23,6 +23,11 @@ int check_numbers_condtions(size_t line_num)
 			else
 				return (cntr);
 		}
+		else if (line_num + 2 < info.line_cnt && strcmp(info.all_lines[line_num + 2]->tokens[0], "else") == 0)
+		{
+			cntr++;
+			line_num += 1;
+		}
 		line_num++;
 	}
 	return (cntr);
@@ -35,7 +40,7 @@ int check_numbers_condtions(size_t line_num)
  * Return: void
  */
 
-int condition(size_t line_num)
+size_t condition(size_t line_num)
 {
 	int count_condtions = 0;
 	size_t new_line = 0;

@@ -1,0 +1,6 @@
+int x = 5;
+while (x < 10)
+{
+    int b = 4;
+    int x = x + 1;
+}

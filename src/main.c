@@ -34,13 +34,17 @@ int main(int argc, char *argv[])
 			break;
 		add_line();
 	}
+
     for (i = 0; i < info.line_cnt; i++)
     {
-        decision(i);
+    	i = decision(i);
+		i--;
     }
 	/* exist */
+	printf("\n");
     overview();
 	free_all();
+	printf("\n");
 	ascii();
 	return (0);
 }

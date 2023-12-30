@@ -51,7 +51,7 @@ typedef struct reg_s
 typedef struct first_s
 {
 	char *first;
-	int (*f)(size_t num_line);
+	size_t (*f)(size_t num_line);
 } first_t;
 
 /**
@@ -93,8 +93,9 @@ typedef struct info_s
 	reg zero;
 	reg * (*get_reg)(char);
 	size_t line_cnt;
-	int j_jumber;
-	int k_jumber;
+	int j_jumper;
+	int k_jumper;
+	int loop_jumper;
 	char *curr_line;
 	char **curr_tokens;
 	line_t **all_lines;
@@ -137,19 +138,21 @@ void ascii(void);
 void malloc_failed(void);
 void free_all(void);
 void add_line(void);
-void decision(size_t line);
+size_t decision(size_t line);
 
 
 /* Conditions */
 int check_numbers_condtions(size_t line_num);
-int condition(size_t line_num);
-int if_condition(size_t line_num);
-void print_condtion(size_t line_num, char *a, char *b,
-		char *symbol, char *equal_symbol);
+size_t condition(size_t line_num);
+size_t if_condition(size_t line_num);
+void print_condition(int eql, char *a, char *b,
+		char *symbol, int loop_or_condition);
 size_t else_or_elseif_condition(size_t line_num, int count_condtions);
+reg return_reg(char *name);
+int valid_int(char *str);
 
 /* Operations */
-int calc(size_t line_number);
+size_t calc(size_t line_number);
 int add(int right, int left);
 int sub(int right, int left);
 int mul(int right, int left);
@@ -158,5 +161,12 @@ int mod(int right, int left);
 int shift_left(int right, int left);
 int shift_right(int right, int left);
 void assign_args(char **first_arg, char **second_arg, int right, int left);
+
+/*Loops*/
+size_t for_loop(size_t line_num);
+size_t while_loop(size_t line_num);
+void preprocess(char *name, int num);
+void count_loop_tokens(size_t line_num, int *init, int *cond, int *increament);
+
 
 #endif

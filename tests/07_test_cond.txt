@@ -1,0 +1,5 @@
+int a = 5;
+if (a > 3)
+    int b = 4;
+else
+    int g = 7;

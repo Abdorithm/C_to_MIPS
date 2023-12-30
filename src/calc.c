@@ -57,7 +57,7 @@ expr_t *do_priority(instruction_t opst[], expr_t *head)
  *
  * Return: number of next line to be executed
  */
-int calc(notUsed size_t line_num)
+size_t calc(notUsed size_t line_num)
 {
     int value, i;
     char *last_temp = NULL, *load_type = NULL;
@@ -90,7 +90,7 @@ int calc(notUsed size_t line_num)
         {
             info.reg_s[i].var = info.all_lines[line_num]->tokens[1];
             info.reg_s[i].value = last_temp ? value : atoi(info.all_lines[line_num]->tokens[3]);
-            printf("%s, %s, (%s)\n\n", load_type, info.reg_s[i].name,
+            printf("\t%s, %s, (%s)\n", load_type, info.reg_s[i].name,
                     last_temp == NULL ? info.all_lines[line_num]->tokens[3] : last_temp);
             break;
         }

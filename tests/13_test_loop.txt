@@ -1,0 +1,5 @@
+for (int x = 0; x < 5; x++)
+{
+    int b = 4;
+    int c = b + 5;
+}

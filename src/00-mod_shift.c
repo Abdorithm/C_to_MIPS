@@ -19,11 +19,11 @@ int mod(int right, int left)
             info.reg_t[i].value = right % left;
             info.reg_t[i].var = "used";
             if (first_arg == NULL && second_arg != NULL)
-                printf("modi %s, %s, %i\n\n", info.reg_t[i].name, second_arg, right);
+                printf("\tmodi %s, %s, %i\n", info.reg_t[i].name, second_arg, right);
             else if (first_arg != NULL && second_arg == NULL)
-                printf("modi %s, %s, %i\n\n", info.reg_t[i].name, first_arg, left);
+                printf("\tmodi %s, %s, %i\n", info.reg_t[i].name, first_arg, left);
             else
-                printf("mod %s, %s, %s\n\n", info.reg_t[i].name, first_arg, second_arg);
+                printf("\tmod %s, %s, %s\n", info.reg_t[i].name, first_arg, second_arg);
             break;
         }
 	}
@@ -49,7 +49,7 @@ int shift_left(int right, int left)
         {
             info.reg_t[i].value = right << left;
             info.reg_t[i].var = "used";
-            printf("sll %s, $t0, %d\n\n", info.reg_t[i].name, left);
+            printf("\tsll %s, $t0, %d\n", info.reg_t[i].name, left);
             break;
         }
     }
@@ -66,8 +66,8 @@ int shift_right(int right, int left)
 {
     int i;
 
-	printf("sub $t0, $t0, $t0\n"
-			"addi $t0, $t0, %d\n", right);
+	printf("\tsub $t0, $t0, $t0\n"
+			"\taddi $t0, $t0, %d\n", right);
 
 	for (i = 2; i < 10; i++)
 	{
@@ -75,7 +75,7 @@ int shift_right(int right, int left)
         {
             info.reg_t[i].value = right >> left;
             info.reg_t[i].var = "used";
-            printf("slr %s, $t0, %d\n\n", info.reg_t[i].name, left);
+            printf("\tslr %s, $t0, %d\n", info.reg_t[i].name, left);
             break;
         }
     }

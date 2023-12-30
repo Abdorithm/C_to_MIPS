@@ -19,11 +19,11 @@ int add(int right, int left)
             info.reg_t[i].value = right + left;
             info.reg_t[i].var = "used";
             if (first_arg == NULL && second_arg != NULL)
-                printf("addi %s, %s, %i\n\n", info.reg_t[i].name, second_arg, right);
+                printf("\taddi %s, %s, %i\n", info.reg_t[i].name, second_arg, right);
             else if (first_arg != NULL && second_arg == NULL)
-                printf("addi %s, %s, %i\n\n", info.reg_t[i].name, first_arg, left);
+                printf("\taddi %s, %s, %i\n", info.reg_t[i].name, first_arg, left);
             else
-                printf("add %s, %s, %s\n\n", info.reg_t[i].name, first_arg, second_arg);
+                printf("\tadd %s, %s, %s\n", info.reg_t[i].name, first_arg, second_arg);
             break;
         }
 	}
@@ -45,8 +45,8 @@ int sub(int right, int left)
 
     if (first_arg == NULL && second_arg != NULL)
     {
-        printf("sub $t0 $t0 $t0\n"
-                "addi $t0 $t0 %d\n", right);
+        printf("\tsub $t0 $t0 $t0\n"
+                "\taddi $t0 $t0 %d\n", right);
         first_arg = "$t0";
     }
 
@@ -57,9 +57,9 @@ int sub(int right, int left)
             info.reg_t[i].value = right - left;
             info.reg_t[i].var = "used";
             if (first_arg != NULL && second_arg == NULL)
-                printf("subi %s, %s, %i\n\n", info.reg_t[i].name, first_arg, left);
+                printf("\tsubi %s, %s, %i\n", info.reg_t[i].name, first_arg, left);
             else
-                printf("sub %s, %s, %s\n\n", info.reg_t[i].name, first_arg, second_arg);
+                printf("\tsub %s, %s, %s\n", info.reg_t[i].name, first_arg, second_arg);
             break;
         }
 	}
