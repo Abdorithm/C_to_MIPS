@@ -110,7 +110,7 @@ char *slice_token(char **token)
 	size_t slice_size = 0;
 	char *new_slice = NULL;
 
-	slice_size = strcspn(*token, ";,(){}&|<<*/%+-=");
+	slice_size = strcspn(*token, ";,(){}&|<>*/%+-=");
 
 	/* one of the delimiters */
 

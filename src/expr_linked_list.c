@@ -19,6 +19,9 @@ expr_t *fill_linked_list(char **expression)
 		/* Create a new node */
 		expr_t *new_node = malloc(sizeof(expr_t));
 
+        if (expression[i][0] == '<' || expression[i][0] == '>')
+            i++;
+
 		if (!new_node)
 			malloc_failed();
 

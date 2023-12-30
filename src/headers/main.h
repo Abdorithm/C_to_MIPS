@@ -157,5 +157,6 @@ int divs(int right, int left);
 int mod(int right, int left);
 int shift_left(int right, int left);
 int shift_right(int right, int left);
+void assign_args(char **first_arg, char **second_arg, int right, int left);
 
 #endif
