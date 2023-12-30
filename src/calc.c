@@ -21,6 +21,7 @@ int do_priority(instruction_t opst[], expr_t *head)
 			{
 				value = opst[i].f(atoi(tmp->prev->data), atoi(tmp->next->data));
 
+                                free(tmp->data);
 				tmp->data = tostring(value);
 				if (tmp->prev->prev)
 				{
