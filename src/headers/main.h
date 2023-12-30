@@ -8,8 +8,38 @@
 
 /* defines */
 #define notUsed __attribute__((unused))
-#define RESET   "\033[0m"
-#define RED     "\033[38;2;136;8;8m"      
+#define RESET       "\033[0m"
+
+#define RED         "\033[38;2;136;8;8m"
+#define GREEN       "\033[38;2;8;136;8m"
+#define BLUE        "\033[38;2;8;8;136m"
+#define YELLOW      "\033[38;2;136;136;8m"
+#define MAGENTA     "\033[38;2;136;8;136m"
+#define CYAN        "\033[38;2;8;136;136m"
+#define WHITE       "\033[38;2;220;220;220m"
+#define BLACK       "\033[38;2;8;8;8m"
+#define ORANGE      "\033[38;2;255;165;0m"
+#define PURPLE      "\033[38;2;128;0;128m"
+#define PINK        "\033[38;2;255;105;180m"
+#define TEAL        "\033[38;2;0;128;128m"
+#define LIME        "\033[38;2;0;255;0m"
+#define BROWN       "\033[38;2;139;69;19m"
+#define OLIVE       "\033[38;2;128;128;0m"
+#define INDIGO      "\033[38;2;75;0;130m"
+#define MAROON      "\033[38;2;128;0;0m"
+
+#define LIGHTRED    "\033[38;2;255;102;102m"
+#define DARKRED     "\033[38;2;139;0;0m"
+#define LIGHTGREEN  "\033[38;2;102;255;102m"
+#define DARKGREEN   "\033[38;2;0;100;0m"
+#define LIGHTBLUE   "\033[38;2;102;178;255m"
+#define DARKBLUE    "\033[38;2;0;0;139m"
+#define LIGHTYELLOW "\033[38;2;255;255;153m"
+#define LIGHTMAGENTA "\033[38;2;255;153;255m"
+#define LIGHTCYAN   "\033[38;2;153;255;255m"
+#define GRAY        "\033[38;2;128;128;128m"
+#define LIGHTGRAY   "\033[38;2;192;192;192m"
+#define DARKGRAY    "\033[38;2;64;64;64m"
 /**
  * struct expr_s - doubly linked list
  * @data: value
@@ -138,14 +168,14 @@ void malloc_failed(void);
 void free_all(void);
 void add_line(void);
 void decision(size_t line);
-
+void print_inst(char *inst, char *reg1, char *reg2, char *imd);
 
 /* Conditions */
 int check_numbers_condtions(size_t line_num);
 int condition(size_t line_num);
 int if_condition(size_t line_num);
 void print_condtion(size_t line_num, char *a, char *b,
-		char *symbol, char *equal_symbol);
+char *symbol, char *equal_symbol);
 size_t else_or_elseif_condition(size_t line_num, int count_condtions);
 
 /* Operations */

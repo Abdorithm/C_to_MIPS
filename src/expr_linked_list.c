@@ -28,7 +28,7 @@ expr_t *fill_linked_list(char **expression)
 		{
 			free_list(head);
 			malloc_failed();
-	}
+		}
 
 		/* Set the pointers of the node */
 		new_node->prev = current;

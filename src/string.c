@@ -1,4 +1,6 @@
 #include "headers/main.h"
+#include <ctype.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -127,4 +129,27 @@ char *slice_token(char **token)
 	new_slice[slice_size] = '\0';
 	*token += slice_size;
 	return (new_slice);
+}
+
+/**
+ * print_inst - print an instruction with colors
+ *
+ * @inst: the instruction
+ * @reg: the register
+ * @imd: extra
+ */
+void print_inst(char *inst, char *reg1, char *reg2, char *imd)
+{
+        printf(LIGHTGREEN);
+        printf("\t%s\t", inst);
+        printf(RESET"$"CYAN);
+        printf("%s", reg1);
+        printf(RESET", $"CYAN);
+        printf("%s", reg2);
+        printf(RESET", ");
+        if (!isdigit(*imd))
+                printf("$"CYAN);
+        printf("%s\n", imd);
+        printf(RESET);
+        
 }

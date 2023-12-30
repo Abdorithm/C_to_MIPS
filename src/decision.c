@@ -9,7 +9,7 @@
  */
 void decision(size_t line)
 {
-        size_t which = 0;
+	size_t which = 0;
 
 	first_t first[] = {
 		{"int", calc},

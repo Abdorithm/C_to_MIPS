@@ -20,8 +20,10 @@ expr_t *do_priority(instruction_t opst[], expr_t *head)
 			if (strcmp(tmp->data, opst[i].opcode) == 0)
 			{
 				free(tmp->data);
-                                node_value = tmp;
-				node_value->data = tostring(opst[i].f(atoi(tmp->prev->data), atoi(tmp->next->data)));
+				node_value = tmp;
+				node_value->data = tostring(opst[i].f(
+					atoi(tmp->prev->data),
+					atoi(tmp->next->data)));
 				if (tmp->prev->prev)
 				{
 					tmp->prev = tmp->prev->prev, free_node(tmp->prev->next);
@@ -40,9 +42,7 @@ expr_t *do_priority(instruction_t opst[], expr_t *head)
 					tmp->next->prev = tmp;
 				}
 				else
-				{
 					free_node(tmp->next), tmp->next = NULL;
-				}
 			}
 			tmp = tmp->next;
 		} /* print_list(head); */
@@ -53,13 +53,15 @@ expr_t *do_priority(instruction_t opst[], expr_t *head)
 
 /**
  * calc - calculate the value of rightside
- * @rightside: the value that have to be in register
+ * @line_num: the current line to calc
  *
  * Return: calculated value
  * Description: ...
  */
 int calc(notUsed size_t line_num)
 {
+	expr_t *node_value = NULL;
+	int value;
 	instruction_t opst[] = {
 		{"<<", shift_left},
 		{">>", shift_right},
@@ -71,8 +73,6 @@ int calc(notUsed size_t line_num)
 		{NULL, NULL}
 	};
 
-	expr_t* node_value = NULL;
-        int value;
 	/*
 	 * i already put the line into tokens with the '=' in there
 	 * fill_linked_list need to be modified to handle this.
@@ -80,8 +80,8 @@ int calc(notUsed size_t line_num)
 	expr_t *head = fill_linked_list(info.all_lines[line_num]->tokens);
 
 	node_value = do_priority(opst, head);
-        if (node_value)
-                value = atoi(node_value->data);
+	if (node_value)
+		value = atoi(node_value->data);
 
 	print_list(head);
 	free_list(head);
