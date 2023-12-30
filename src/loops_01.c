@@ -35,7 +35,7 @@ void count_loop_tokens(size_t line_num, int *init, int *cond, int *increament)
  * num_operation - put a num in the register
  *
  * @name : the name of the variable
- * @num : the value of the variable
+ * @num : the value of the va riable
 */
 
 void preprocess(char *name, int num)
@@ -53,10 +53,10 @@ void preprocess(char *name, int num)
  * @line_num : the number of the line
 */
 
-void while_loop(size_t line_num)
+size_t while_loop(size_t line_num)
 {
 	char *a, *b, *symbol;
-	int eql = 0, i;
+	int eql = 0, i = line_num + 2;
 
 	if (info.all_lines[line_num]->size == 6)
 		b = info.all_lines[line_num]->tokens[4];
@@ -71,15 +71,19 @@ void while_loop(size_t line_num)
 		preprocess(a, atoi(a));
 	if (valid_int(b))
 		preprocess(b, atoi(b));
-	printf("loop%d:\n", info.loop_cnt);
-	print_condition(eql, a, b, symbol);
+	printf("loop%d:\n", info.loop_jumper);
+	print_condition(eql, a, b, symbol, 1);
+	/*
+	* while (dfklsdjf)
+	*	adskjfsdkf
+	*/
 	if (!strcmp("{", info.all_lines[line_num + 1]->tokens[0]))
 	{
-		i = line_num + 2;
 		while (strcmp("}", info.all_lines[i]->tokens[0]))
 		{
 			i++;
 		}
+		i++;
 	}
 	else
 	{
@@ -88,9 +92,10 @@ void while_loop(size_t line_num)
 		 *single line decision
 		 */
 	}
-	printf("\tJ loop%d\n", info.loop_cnt);
-	printf("Exit:\n");
-	info.loop_cnt++;
+	printf("\tJ loop%d\n", info.loop_jumper);
+	printf("Exit%d:\n", info.loop_jumper);
+	info.loop_jumper++;
+	return(i);
 }
 
 /**
@@ -99,9 +104,9 @@ void while_loop(size_t line_num)
  * @line_num : the number of the line
 */
 
-void for_loop(size_t line_num)
+size_t for_loop(size_t line_num)
 {
-	int cnt_init, cnt_cond, cnt_increament, eql, i;
+	int cnt_init, cnt_cond, cnt_increament, eql, i = line_num + 2;
 	char *a, *b, *symbol;
 
 	count_loop_tokens(line_num, &cnt_init, &cnt_cond, &cnt_increament);
@@ -114,21 +119,23 @@ void for_loop(size_t line_num)
 	eql = ((cnt_cond == 4)? 1 : 0);
 	b = info.all_lines[line_num]->tokens[cnt_init + 5 + eql];
 	if (valid_int(b)) preprocess(b, atoi(b));
-	printf("loop%d:\n", info.loop_cnt);
-	print_condition(eql, a, b, symbol);
+	printf("loop%d:\n", info.loop_jumper);
+	print_condition(eql, a, b, symbol, 1);
 	if (!strcmp("{", info.all_lines[line_num + 1]->tokens[0]))
 	{
-		i = line_num + 2;
 		while (strcmp("}", info.all_lines[i]->tokens[0]))
 		{
+			printf("\tmuliple line loop\n");
 			/* decision */
 			i++;
 		}
+		i++;
 		/* handle increament */
 	}
 	else
 		printf("\tsingle line loop\n");
-	printf("\tJ loop%d\n", info.loop_cnt);
-	printf("Exit:\n");
-	info.loop_cnt++;
+	printf("\tJ loop%d\n", info.loop_jumper);
+	printf("Exit%d:\n", info.loop_jumper);
+	info.loop_jumper++;
+	return (i);
 }

@@ -40,11 +40,11 @@
 	0, \
 	1, \
 	1, \
+	1, \
 	NULL, \
 	NULL, \
 	NULL, \
-	NULL, \
-	1\
+	NULL \
 }
 
 #endif

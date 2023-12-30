@@ -11,7 +11,7 @@ info_t info = INIT_INF;
  */
 int main(int argc, char *argv[])
 {
-	size_t len = 1;
+	size_t len = 1, num;
 	ssize_t read = 1;
 	notUsed	size_t i, j;
 
@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
-	}
+	} 
 	/*read line by line*/
 	while (read)
 	{
@@ -35,8 +35,8 @@ int main(int argc, char *argv[])
 			break;
 		add_line();
 	}
-
-	for_loop(0);
+	num = for_loop(0);
+	for_loop(num);
 	/* just for testing */
 	/*
 	for (i = 0; i < info.line_cnt; i++)

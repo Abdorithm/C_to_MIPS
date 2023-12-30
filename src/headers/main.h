@@ -74,13 +74,13 @@ typedef struct line_s
  * @zero: Register $ZERO
  * @get_reg: a pointer function so you can access it through info
  * @line_cnt: how many lines are there
- * @j_jumber: count the j_jumber
- * @k_jumber: count the k_jumber
+ * @j_jumper: count the j_jumber
+ * @k_jumper: count the k_jumber
  * @curr_line: current line read
  * @curr_tokens: current tokens
  * @all_lines: all the lines in one place
  * @file: the file we read
- * @loop_cnt : count the loops
+ * @loop_jumper : count the loops
  *
  * Description: The structure of various MIPS registers
  */
@@ -93,14 +93,13 @@ typedef struct info_s
 	reg zero;
 	reg * (*get_reg)(char);
 	size_t line_cnt;
-	int j_jumber;
-	int k_jumber;
+	int j_jumper;
+	int k_jumper;
+	int loop_jumper;
 	char *curr_line;
 	char **curr_tokens;
 	line_t **all_lines;
 	FILE *file;
-	int loop_cnt;
-
 }  info_t;
 
 /**
@@ -141,9 +140,9 @@ int valid_int(char *str);
 
 /* Conditions */
 int check_numbers_condtions(size_t line_num);
-int condition(size_t line_num);
-int if_condition(size_t line_num);
-void print_condition(int eql, char *a, char *b, char *symbol);
+size_t condition(size_t line_num);
+size_t if_condition(size_t line_num);
+void print_condition(int eql, char *a, char *b, char *symbol, int loop_or_condition);
 size_t else_or_elseif_condition(size_t line_num, int count_condtions);
 reg return_reg(char *name, char reg_name);
 
@@ -158,8 +157,9 @@ int shift_left(int right, int left);
 int shift_right(int right, int left);
 
 /* loops */
-void while_loop(size_t line_num);
-void for_loop(size_t line_num);
+size_t while_loop(size_t line_num);
+size_t for_loop(size_t line_num);
 void num_operation(char *num);
+void preprocess(char *name, int num);
 void count_loop_tokens(size_t line_num, int *init, int *cond, int *increament);
 #endif
