@@ -2,3 +2,4 @@
 #valgrind files
 vgcore*
 build
+mipsify
