@@ -8,7 +8,8 @@
 
 /* defines */
 #define notUsed __attribute__((unused))
-
+#define RESET   "\033[0m"
+#define RED     "\033[38;2;136;8;8m"      
 /**
  * struct expr_s - doubly linked list
  * @data: value
@@ -132,9 +133,12 @@ void free_node(expr_t *node);
 void free_list(expr_t *head);
 void overview(void);
 void credits(void);
+void ascii(void);
 void malloc_failed(void);
 void free_all(void);
 void add_line(void);
+void decision(size_t line);
+
 
 /* Conditions */
 int check_numbers_condtions(size_t line_num);

@@ -76,10 +76,10 @@ int calc(notUsed size_t line_num)
 	 * i already put the line into tokens with the '=' in there
 	 * fill_linked_list need to be modified to handle this.
 	 */
-	expr_t *head = fill_linked_list(info.curr_tokens);
+	expr_t *head = fill_linked_list(info.all_lines[line_num]->tokens);
 
 	value = do_priority(opst, head);
-	print_list(head);
+        print_list(head);
 	free_list(head);
 
 	return (value);

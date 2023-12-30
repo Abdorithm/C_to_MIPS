@@ -26,28 +26,28 @@ int if_condition(size_t line_num)
 				if(strcmp(equal_symbol,"=") == 0)
 				{
 					b = info.all_lines[line_num]->tokens[5];
-					printf("   blt %s %s L%d\n", a, b, info.j_jumber);
+					printf("\tblt %s %s L%d\n", a, b, info.j_jumber);
 				}
 				else
-				printf("   ble %s %s L%d\n", a, b, info.j_jumber);
+				printf("\tble %s %s L%d\n", a, b, info.j_jumber);
 			}
 			else if(strcmp(symbol,"<") == 0)
 			{
 				if(strcmp(equal_symbol,"=") == 0)
 				{
 					b = info.all_lines[line_num]->tokens[5];
-					printf("   bgt %s %s L%d\n", a, b, info.j_jumber);
+					printf("\tbgt %s %s L%d\n", a, b, info.j_jumber);
 				}
 				else
-				printf("   bge %s %s L%d\n", a, b, info.j_jumber);
+				printf("\tbge %s %s L%d\n", a, b, info.j_jumber);
 			}
 			else if (strcmp(symbol,"!") == 0)
 			{
 				b = info.all_lines[line_num]->tokens[5];
-				printf("   beq %s %s L%d\n", a, b, info.j_jumber);
+				printf("\tbeq %s %s L%d\n", a, b, info.j_jumber);
 			}
 			else
-			printf("   bne %s %s L%d\n", a, b, info.j_jumber);
+			printf("\tbne %s %s L%d\n", a, b, info.j_jumber);
 		}
 		else if (strcmp(begining_string,"}") == 0)
 		{
@@ -58,12 +58,11 @@ int if_condition(size_t line_num)
 		}
 		else if (strcmp(begining_string,"{") == 0 || flag == 1)
 		{
-			if(flag == 0)
-				flag=1;
+                        if(flag == 0)
+			        flag=1;
                         else
                         {
-                                printf("   Conddddtion\n");
-				/*decision(line_num);*/
+                                printf("\tConddddtion\n");
 			}
 		}
 		line_num++;
@@ -78,28 +77,28 @@ void print_condtion(size_t line_num, char *a, char *b, char *symbol, char *equal
 		if(strcmp(equal_symbol,"=") == 0)
 		{
 			b = info.all_lines[line_num]->tokens[5];
-			printf("   blt %s %s L%d\n", a, b, info.j_jumber);
+			printf("\tblt %s %s L%d\n", a, b, info.j_jumber);
 		}
 		else
-		printf("   ble %s %s L%d\n", a, b, info.j_jumber);
+		printf("\tble %s %s L%d\n", a, b, info.j_jumber);
 	}
 	else if(strcmp(symbol,"<") == 0)
 	{
 		if(strcmp(equal_symbol,"=") == 0)
 		{
 			b = info.all_lines[line_num]->tokens[5];
-			printf("   bgt %s %s L%d\n", a, b, info.j_jumber);
+			printf("\tbgt %s %s L%d\n", a, b, info.j_jumber);
 		}
 		else
-		printf("   bge %s %s L%d\n", a, b, info.j_jumber);
+		printf("\tbge %s %s L%d\n", a, b, info.j_jumber);
 	}
 	else if (strcmp(symbol,"!") == 0)
 	{
 		b = info.all_lines[line_num]->tokens[5];
-		printf("   beq %s %s L%d\n", a, b, info.j_jumber);
+		printf("\tbeq %s %s L%d\n", a, b, info.j_jumber);
 	}
 	else
-	printf("   bne %s %s L%d\n", a, b, info.j_jumber);
+	printf("\tbne %s %s L%d\n", a, b, info.j_jumber);
 }
 
 /**
@@ -142,7 +141,7 @@ size_t else_or_elseif_condition(size_t line_num, int count_condtions)
 		{
 			if(count_condtions > 1)
 			{
-				printf("   JK%d\n", info.k_jumber);
+				printf("\tJK%d\n", info.k_jumber);
 				printf("L%d:\n", info.j_jumber);
 				info.j_jumber++;
 				flag = 0;
@@ -162,8 +161,7 @@ size_t else_or_elseif_condition(size_t line_num, int count_condtions)
 				flag=1;
 			else
                         {
-                                printf("   Conddddtion\n");
-                                /*decision(line_num);*/
+                                printf("\tConddddtion\n");
 			}
 		}
 		line_num++;
