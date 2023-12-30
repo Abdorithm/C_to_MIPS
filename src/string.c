@@ -146,7 +146,11 @@ void print_inst(char *inst, char *reg1, char *reg2, char *imd)
         printf("%s", reg1);
         printf(RESET", $"CYAN);
         printf("%s", reg2);
-        printf(RESET", ");
+        printf(RESET);
+        if (imd == NULL)
+                return;
+
+        printf(", ");
         if (!isdigit(*imd))
                 printf("$"CYAN);
         printf("%s\n", imd);
