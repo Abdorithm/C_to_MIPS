@@ -160,4 +160,6 @@ int shift_right(int right, int left);
 /* loops */
 void while_loop(size_t line_num);
 void for_loop(size_t line_num);
+void num_operation(char *num);
+void count_loop_tokens(size_t line_num, int *init, int *cond, int *increament);
 #endif
