@@ -2,51 +2,68 @@
 
 /**
  * add - add two numbers
- * @right: first number
- * @left: second number
+ * @left_s: first number
+ * @right_s: second number
+ * @line_num: line number
+ *
  * Return: result
  */
-int add(int right, int left)
+int add(char *left_s, char *right_s, size_t line_num)
 {
-    int i;
+    int i, left = INT_MAX, right = INT_MAX;
     char *first_arg = NULL, *second_arg = NULL;
 
-    assign_args(&first_arg, &second_arg, right, left);
+    prev_temps(&first_arg, &second_arg, left_s, right_s, &left, &right);
+
+    if (left == INT_MAX)
+        left = atoi(left_s);
+    if (right == INT_MAX)
+        right = atoi(right_s);
+
+    assign_args(&first_arg, &second_arg, left, right);
 	for (i = 2; i < 10; i++)
 	{
 		if (info.reg_t[i].var == NULL)
         {
-            info.reg_t[i].value = right + left;
-            info.reg_t[i].var = "used";
+            info.reg_t[i].value = left + right;
+            info.reg_t[i].var = info.all_lines[line_num]->tokens[1];
             if (first_arg == NULL && second_arg != NULL)
-                printf("addi %s, %s, %i\n\n", info.reg_t[i].name, second_arg, right);
+                printf("\taddi %s, %s, %i\n", info.reg_t[i].name, second_arg, left);
             else if (first_arg != NULL && second_arg == NULL)
-                printf("addi %s, %s, %i\n\n", info.reg_t[i].name, first_arg, left);
+                printf("\taddi %s, %s, %i\n", info.reg_t[i].name, first_arg, right);
             else
-                printf("add %s, %s, %s\n\n", info.reg_t[i].name, first_arg, second_arg);
+                printf("\tadd %s, %s, %s\n", info.reg_t[i].name, first_arg, second_arg);
             break;
         }
 	}
-	return (right + left);
+	return (left + right);
 }
 
 /**
  * sub - sub two numbers
- * @right: first number
- * @left: second number
+ * @left_s: first number
+ * @right_s: second number
+ * @line_num: ...
  * Return: result
  */
-int sub(int right, int left)
+int sub(char *left_s, char *right_s, size_t line_num)
 {
-    int i;
+    int i, left = INT_MAX, right = INT_MAX;
     char *first_arg = NULL, *second_arg = NULL;
 
-    assign_args(&first_arg, &second_arg, right, left);
+    prev_temps(&first_arg, &second_arg, left_s, right_s, &left, &right);
+
+    if (left == INT_MAX)
+        left = atoi(left_s);
+    if (right == INT_MAX)
+        right = atoi(right_s);
+
+    assign_args(&first_arg, &second_arg, left, right);
 
     if (first_arg == NULL && second_arg != NULL)
     {
-        printf("sub $t0 $t0 $t0\n"
-                "addi $t0 $t0 %d\n", right);
+        printf("\tsub $t0 $t0 $t0\n"
+                "\taddi $t0 $t0 %d\n", left);
         first_arg = "$t0";
     }
 
@@ -54,14 +71,14 @@ int sub(int right, int left)
 	{
 		if (info.reg_t[i].var == NULL)
         {
-            info.reg_t[i].value = right - left;
-            info.reg_t[i].var = "used";
+            info.reg_t[i].value = left - right;
+            info.reg_t[i].var = info.all_lines[line_num]->tokens[1];
             if (first_arg != NULL && second_arg == NULL)
-                printf("subi %s, %s, %i\n\n", info.reg_t[i].name, first_arg, left);
+                printf("\tsubi %s, %s, %i\n", info.reg_t[i].name, first_arg, right);
             else
-                printf("sub %s, %s, %s\n\n", info.reg_t[i].name, first_arg, second_arg);
+                printf("\tsub %s, %s, %s\n", info.reg_t[i].name, first_arg, second_arg);
             break;
         }
 	}
-	return (right - left);
+	return (left - right);
 }

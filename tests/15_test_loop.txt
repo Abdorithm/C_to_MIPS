@@ -1,0 +1,9 @@
+for (int x = 0; x < 5; x++)
+{
+    int b = 4;
+    int c = b + 5;
+    if (c < b)
+        int g = 4 \ b + c * 12;
+    else
+        int k = 4 \ b + c * 12 * b * 34;
+}

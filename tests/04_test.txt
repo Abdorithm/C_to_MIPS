@@ -1,0 +1,5 @@
+int n = 6 % 4;
+int m = 4 % 6;
+
+int k = 6 % n;
+int j = 17 % m;

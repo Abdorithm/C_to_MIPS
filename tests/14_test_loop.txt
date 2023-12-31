@@ -1,0 +1,8 @@
+for (int x = 0; x < 5; x++)
+{
+    int b = 4;
+    int c = b + 5;
+}
+
+for (int z = 0; z < 5; z++)
+    int n = b * 3;
