@@ -164,7 +164,7 @@ void print_inst(char *inst, char *reg1, char *reg2, char *imd, char *num)
         if (isdigit(*reg2))
         {
                 printf(RESET", ");
-                printf("%s\n", reg2); 
+                printf("%s", reg2); 
         }
         else 
         {
