@@ -141,12 +141,13 @@ char *slice_token(char **token)
  */
 void print_inst(char *inst, char *reg1, char *reg2, char *imd, char *num)
 {
-        if (reg1 == NULL) /* label */
+        if (reg1 == NULL && num == NULL) /* label */
         {
                 printf("$"ORANGE);
                 printf("%s%s", inst, imd);
                 printf(RESET);
                 printf(":\n");
+                printf(RESET);
                 return;
         }
         printf(LIGHTGREEN);
@@ -160,9 +161,18 @@ void print_inst(char *inst, char *reg1, char *reg2, char *imd, char *num)
                 return;
         }
         printf("%s", reg1);
-        printf(RESET", $"CYAN);
-        printf("%s", reg2);
-        printf(RESET);
+        if (isdigit(*reg2))
+        {
+                printf(RESET", ");
+                printf("%s\n", reg2); 
+        }
+        else 
+        {
+
+                printf(RESET", $"CYAN);
+                printf("%s", reg2);
+                printf(RESET);
+        }
         if (imd == NULL)
         {
                 printf("\n");
