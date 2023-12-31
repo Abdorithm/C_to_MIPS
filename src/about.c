@@ -16,19 +16,19 @@ void overview(void)
 	for (i = 0; i < 4; i++)
 	{
 		if (info.reg_a[i].var != NULL)
-			printf(" * %s ---> %d\n", info.reg_a[i].name, info.reg_a[i].value);
+			printf(" * [%s]\t%s ---> %d\n", info.reg_a[i].var, info.reg_a[i].name, info.reg_a[i].value);
 	}
 
 	for (i = 0; i < 8; i++)
 	{
 		if (info.reg_s[i].var != NULL)
-			printf(" * %s ---> %d\n", info.reg_s[i].name, info.reg_s[i].value);
+			printf(" * [%s]\t%s ---> %d\n", info.reg_s[i].var, info.reg_s[i].name, info.reg_s[i].value);
 	}
 
 	for (i = 0; i < 10; i++)
 	{
 		if (info.reg_t[i].var != NULL)
-			printf(" * %s ---> %d\n", info.reg_t[i].name, info.reg_t[i].value);
+			printf(" * [%s]\t%s ---> %d\n", info.reg_t[i].var, info.reg_t[i].name, info.reg_t[i].value);
 	}
 }
 
