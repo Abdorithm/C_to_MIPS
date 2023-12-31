@@ -54,11 +54,8 @@ expr_t *do_priority(instruction_t opst[], expr_t *head, size_t line_num)
 
 /**
  * calc - calculate the value of rightside
-<<<<<<< HEAD
+ *
  * @line_num: the number of the line
-=======
- * @line_num: the current line to calc
->>>>>>> origin/hazem
  *
  * Return: number of next line to be executed
  */
@@ -106,12 +103,10 @@ size_t calc(notUsed size_t line_num)
                 {
                         info.reg_s[i].var = info.all_lines[line_num]->tokens[1];
                         info.reg_s[i].value = last_temp ? value : atoi(info.all_lines[line_num]->tokens[3]);
-                        printf("\t%s, %s, (%s)\n\n", load_type, info.reg_s[i].name,
-                               last_temp == NULL ? info.all_lines[line_num]->tokens[3] : last_temp);
+                        print_inst(load_type, info.reg_s[i].name, last_temp == NULL ? info.all_lines[line_num]->tokens[3] : last_temp, NULL);
                         break;
                 }
         }
-        print_list(head);
         free_list(head);
         return (line_num + 1);
 }

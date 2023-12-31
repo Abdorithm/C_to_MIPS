@@ -172,13 +172,13 @@ void free_all(void);
 void add_line(void);
 size_t decision(size_t line);
 void print_inst(char *inst, char *reg1, char *reg2, char *imd);
-
+void fake_int(size_t line);
 /* Conditions */
 int check_numbers_condtions(size_t line_num);
 size_t condition(size_t line_num);
 size_t if_condition(size_t line_num);
-void print_condtion(size_t line_num, char *a, char *b,
-char *symbol, char *equal_symbol);
+void print_condition(int eql, char *a, char *b,
+		char *symbol, int loop_or_condition);
 size_t else_or_elseif_condition(size_t line_num, int count_condtions);
 reg return_reg(char *name);
 int valid_int(char *str);

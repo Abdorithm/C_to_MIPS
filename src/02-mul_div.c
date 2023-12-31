@@ -14,27 +14,27 @@
  */
 void prev_temps(char notUsed **first_arg, char **second_arg, char *left_s, char *right_s, int *left, int *right)
 {
-    int i;
+        int i;
 
-	for (i = 0; i < 8; i++)
-	{
-        if (info.reg_s[i].var != NULL && strcmp(info.reg_s[i].var, left_s) == 0)
+        for (i = 0; i < 8; i++)
         {
-            *first_arg = info.reg_s[i].name;
-            *left = info.reg_s[i].value;
-            break;
+                if (info.reg_s[i].var != NULL && strcmp(info.reg_s[i].var, left_s) == 0)
+                {
+                        *first_arg = info.reg_s[i].name;
+                        *left = info.reg_s[i].value;
+                        break;
+                }
         }
-    }
 
-	for (i = 0; i < 8; i++)
-	{
-        if (info.reg_s[i].var != NULL && strcmp(info.reg_s[i].var, right_s) == 0)
+        for (i = 0; i < 8; i++)
         {
-            *second_arg = info.reg_s[i].name;
-            *right = info.reg_s[i].value;
-            break;
+                if (info.reg_s[i].var != NULL && strcmp(info.reg_s[i].var, right_s) == 0)
+                {
+                        *second_arg = info.reg_s[i].name;
+                        *right = info.reg_s[i].value;
+                        break;
+                }
         }
-    }
 }
 
 /**
@@ -49,34 +49,36 @@ void prev_temps(char notUsed **first_arg, char **second_arg, char *left_s, char 
  */
 void assign_args(char **first_arg, char **second_arg, int left, int right)
 {
-    int i;
+        int i;
 
-	for (i = 0; i < 10 && *first_arg == NULL; i++)
-	{
-        if (info.reg_t[i].value == left)
+        for (i = 0; i < 10 && *first_arg == NULL; i++)
         {
-            *first_arg = info.reg_t[i].name;
-            break;
+                if (info.reg_t[i].value == left)
+                {
+                        *first_arg = info.reg_t[i].name;
+                        break;
+                }
         }
-    }
 
-	for (i = 0; i < 10 && *second_arg == NULL; i++)
-	{
-        if (info.reg_t[i].value == right)
+        for (i = 0; i < 10 && *second_arg == NULL; i++)
         {
-            *second_arg = info.reg_t[i].name;
-            break;
+                if (info.reg_t[i].value == right)
+                {
+                        *second_arg = info.reg_t[i].name;
+                        break;
+                }
         }
-    }
 
-    if (*first_arg == NULL && *second_arg == NULL)
-    {
-        printf("\tsub $t0 $t0 $t0\n"
-                "\taddi $t0 $t0 %d\n"
-                "\tsub $t1 $t1 $t1\n"
-                "\taddi $t1 $t1 %d\n", left, right);
-        *first_arg = "$t0", *second_arg = "$t1";
-    }
+        if (*first_arg == NULL && *second_arg == NULL)
+        {
+
+                print_inst("sub", "t0", "t0", "t0");
+                print_inst("addi", "t0", "t0", tostring(left));
+                print_inst("sub", "t1", "t1", "t1");
+                print_inst("addi", "t0", "t0", tostring(right));
+
+                *first_arg = "$t0", *second_arg = "$t1";
+        }
 }
 
 /**
@@ -88,33 +90,33 @@ void assign_args(char **first_arg, char **second_arg, int left, int right)
  */
 int mul(char *left_s, char *right_s, size_t line_num)
 {
-    int i, left = INT_MAX, right = INT_MAX;
-    char *first_arg = NULL, *second_arg = NULL;
+        int i, left = INT_MAX, right = INT_MAX;
+        char *first_arg = NULL, *second_arg = NULL;
 
-    prev_temps(&first_arg, &second_arg, left_s, right_s, &left, &right);
+        prev_temps(&first_arg, &second_arg, left_s, right_s, &left, &right);
 
-    if (left == INT_MAX)
-        left = atoi(left_s);
-    if (right == INT_MAX)
-        right = atoi(right_s);
+        if (left == INT_MAX)
+                left = atoi(left_s);
+        if (right == INT_MAX)
+                right = atoi(right_s);
 
-    assign_args(&first_arg, &second_arg, left, right);
-	for (i = 2; i < 10; i++)
-	{
-		if (info.reg_t[i].var == NULL)
+        assign_args(&first_arg, &second_arg, left, right);
+        for (i = 2; i < 10; i++)
         {
-            info.reg_t[i].value = left * right;
-            info.reg_t[i].var = info.all_lines[line_num]->tokens[1];
-            if (first_arg == NULL && second_arg != NULL)
-                printf("\tmuli %s, %s, %i\n", info.reg_t[i].name, second_arg, left);
-            else if (first_arg != NULL && second_arg == NULL)
-                printf("\tmuli %s, %s, %i\n", info.reg_t[i].name, first_arg, right);
-            else
-                printf("\tmul %s, %s, %s\n", info.reg_t[i].name, first_arg, second_arg);
-            break;
+                if (info.reg_t[i].var == NULL)
+                {
+                        info.reg_t[i].value = left * right;
+                        info.reg_t[i].var = info.all_lines[line_num]->tokens[1];
+                        if (first_arg == NULL && second_arg != NULL)
+                                print_inst("muli", info.reg_t[i].name, second_arg, tostring(left));
+                        else if (first_arg != NULL && second_arg == NULL)
+                                print_inst("muli", info.reg_t[i].name, first_arg, tostring(right));
+                        else
+                                print_inst("mul", info.reg_t[i].name, first_arg, second_arg);
+                        break;
+                }
         }
-	}
-	return (left * right);
+        return (left * right);
 }
 
 /**
@@ -126,37 +128,38 @@ int mul(char *left_s, char *right_s, size_t line_num)
  */
 int divs(char *left_s, char *right_s, size_t line_num)
 {
-    int i, left = INT_MAX, right = INT_MAX;
-    char *first_arg = NULL, *second_arg = NULL;
+        int i, left = INT_MAX, right = INT_MAX;
+        char *first_arg = NULL, *second_arg = NULL;
 
-    prev_temps(&first_arg, &second_arg, left_s, right_s, &left, &right);
+        prev_temps(&first_arg, &second_arg, left_s, right_s, &left, &right);
 
-    if (left == INT_MAX)
-        left = atoi(left_s);
-    if (right == INT_MAX)
-        right = atoi(right_s);
+        if (left == INT_MAX)
+                left = atoi(left_s);
+        if (right == INT_MAX)
+                right = atoi(right_s);
 
-    assign_args(&first_arg, &second_arg, left, right);
+        assign_args(&first_arg, &second_arg, left, right);
 
-    if (first_arg == NULL && second_arg != NULL)
-    {
-        printf("\tsub $t0 $t0 $t0\n"
-                "\taddi $t0 $t0 %d\n", left);
-        first_arg = "$t0";
-    }
-
-	for (i = 2; i < 10; i++)
-	{
-		if (info.reg_t[i].var == NULL)
+        if (first_arg == NULL && second_arg != NULL)
         {
-            info.reg_t[i].value = left / right;
-            info.reg_t[i].var = info.all_lines[line_num]->tokens[1];
-            if (first_arg != NULL && second_arg == NULL)
-                printf("\tdivi %s, %s, %i\n", info.reg_t[i].name, first_arg, right);
-            else
-                printf("\tdiv %s, %s, %s\n", info.reg_t[i].name, first_arg, second_arg);
-            break;
+
+                print_inst("sub", "t0", "t0", "t0");
+                print_inst("addi", "t0", "t0", tostring(left));
+                first_arg = "$t0";
         }
-	}
-	return (left / right);
+
+        for (i = 2; i < 10; i++)
+        {
+                if (info.reg_t[i].var == NULL)
+                {
+                        info.reg_t[i].value = left / right;
+                        info.reg_t[i].var = info.all_lines[line_num]->tokens[1];
+                        if (first_arg != NULL && second_arg == NULL)
+                                print_inst("divi", info.reg_t[i].name, first_arg, tostring(right));
+                        else
+                                print_inst("div", info.reg_t[i].name, first_arg, second_arg);
+                        break;
+                }
+        }
+        return (left / right);
 }

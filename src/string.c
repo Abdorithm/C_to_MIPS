@@ -140,6 +140,14 @@ char *slice_token(char **token)
  */
 void print_inst(char *inst, char *reg1, char *reg2, char *imd)
 {
+        if (reg1 == NULL) /* label */
+        {
+                printf("$"ORANGE);
+                printf("%s%s", inst, imd);
+                printf(RESET);
+                printf(":\n");
+                return;
+        }
         printf(LIGHTGREEN);
         printf("\t%s\t", inst);
         printf(RESET"$"CYAN);
@@ -148,7 +156,10 @@ void print_inst(char *inst, char *reg1, char *reg2, char *imd)
         printf("%s", reg2);
         printf(RESET);
         if (imd == NULL)
+        {
+                printf("\n");
                 return;
+        }
 
         printf(", ");
         if (!isdigit(*imd))

@@ -29,7 +29,7 @@ size_t if_condition(size_t line_num)
 		else if (strcmp(begining_string, "}") == 0)
 		{
 			line_num += 1;
-			printf("L%d:\n", info.j_jumper);
+                        print_inst("L", NULL, NULL, tostring(info.j_jumper));
 			info.j_jumper++;
 			break;
 		}
@@ -45,7 +45,7 @@ size_t if_condition(size_t line_num)
 
 			decision(line_num);
 			line_num += 1;
-			printf("Cond%d:\n", info.j_jumper);
+                        print_inst("C", NULL, NULL, tostring(info.j_jumper));
 			info.j_jumper++;
 			break;
 		}
@@ -75,7 +75,10 @@ void print_condition(int eql, char *a, char *b, char *symbol, int loop_or_condit
 	if(strcmp(symbol,">") == 0)
 	{
 		if(eql)
+                {
 			printf("\tblt %s %s %s%d:\n", return_reg(a).name, return_reg(b).name, jump, jumper);
+                        print_inst("blt", return_reg(a).name, return_reg(b).name, jump);
+                }
 		else
 			printf("\tble %s %s %s%d:\n", return_reg(a).name, return_reg(b).name, jump, jumper);
 	}
