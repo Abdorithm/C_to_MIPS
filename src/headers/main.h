@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <limits.h>
 
 /* defines */
 #define notUsed __attribute__((unused))
@@ -110,10 +111,11 @@ typedef struct info_s
  *
  * Description: opcode and its function
  */
+
 typedef struct instruction_s
 {
 	char *opcode;
-	int (*f)(int right, int left);
+	int (*f)(char *left_s, char *right_s, size_t line_num);
 } instruction_t;
 
 extern info_t info;
@@ -129,7 +131,7 @@ void free_2d(char **array);
 expr_t *fill_linked_list(char **expression);
 int expr_check(char ch);
 void print_list(expr_t *head);
-expr_t *do_priority(instruction_t opst[], expr_t *head);
+expr_t *do_priority(instruction_t opst[], expr_t *head, size_t line_num);
 void free_node(expr_t *node);
 void free_list(expr_t *head);
 void overview(void);
@@ -152,14 +154,19 @@ reg return_reg(char *name);
 int valid_int(char *str);
 
 /* Operations */
+
 size_t calc(size_t line_number);
-int add(int right, int left);
-int sub(int right, int left);
-int mul(int right, int left);
-int divs(int right, int left);
-int mod(int right, int left);
-int shift_left(int right, int left);
-int shift_right(int right, int left);
+
+int add(char *left_s, char *right_s, size_t line_num);
+int sub(char *left_s, char *right_s, size_t line_num);
+int mul(char *left_s, char *right_s, size_t line_num);
+int divs(char *left_s, char *right_s, size_t line_num);
+int mod(char *left_s, char *right_s, size_t line_num);
+int shift_right(char *left_s, char *right_s, size_t line_num);
+int shift_left(char *left_s, char *right_s, size_t line_num);
+
+void prev_temps(char **first_arg, char **second_arg, char *left_s, char *right_s, int *left, int *right);
+
 void assign_args(char **first_arg, char **second_arg, int right, int left);
 
 /*Loops*/
