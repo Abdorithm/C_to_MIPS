@@ -105,7 +105,7 @@ size_t calc(notUsed size_t line_num)
             break;
         }
 	}
-
+    print_list(head);
 	free_list(head);
 	return (line_num + 1);
 }

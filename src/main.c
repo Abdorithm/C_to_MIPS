@@ -43,6 +43,7 @@ int main(int argc, char *argv[])
 	/* exist */
 	printf("\n");
     overview();
+    credits();
 	free_all();
 	printf("\n");
 	ascii();
