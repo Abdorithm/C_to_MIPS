@@ -171,8 +171,9 @@ void malloc_failed(void);
 void free_all(void);
 void add_line(void);
 size_t decision(size_t line);
-void print_inst(char *inst, char *reg1, char *reg2, char *imd);
+void print_inst(char *inst, char *reg1, char *reg2, char *imd, char *num);
 void fake_int(size_t line);
+
 /* Conditions */
 int check_numbers_condtions(size_t line_num);
 size_t condition(size_t line_num);

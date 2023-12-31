@@ -28,11 +28,11 @@ int add(char *left_s, char *right_s, size_t line_num)
                         info.reg_t[i].value = left + right;
                         info.reg_t[i].var = info.all_lines[line_num]->tokens[1];
                         if (first_arg == NULL && second_arg != NULL)
-                                print_inst("addi", info.reg_t[i].name, second_arg, tostring(left));
+                                print_inst("addi", info.reg_t[i].name, second_arg, tostring(left), NULL);
                         else if (first_arg != NULL && second_arg == NULL)
-                                print_inst("addi", info.reg_t[i].name, first_arg, tostring(right));
+                                print_inst("addi", info.reg_t[i].name, first_arg, tostring(right), NULL);
                         else
-                                print_inst("add", info.reg_t[i].name, first_arg, second_arg);
+                                print_inst("add", info.reg_t[i].name, first_arg, second_arg, NULL);
                         break;
                 }
         }
@@ -63,8 +63,8 @@ int sub(char *left_s, char *right_s, size_t line_num)
         if (first_arg == NULL && second_arg != NULL)
         {
 
-                print_inst("sub", "t0", "t0", "t0");
-                print_inst("addi", "t0", "t0", tostring(left));
+                print_inst("sub", "t0", "t0", "t0", NULL);
+                print_inst("addi", "t0", "t0", tostring(left), NULL);
                 first_arg = "$t0";
         }
 
@@ -75,9 +75,9 @@ int sub(char *left_s, char *right_s, size_t line_num)
                         info.reg_t[i].value = left - right;
                         info.reg_t[i].var = info.all_lines[line_num]->tokens[1];
                         if (first_arg != NULL && second_arg == NULL)
-                                print_inst("subi", info.reg_t[i].name, first_arg, tostring(right));
+                                print_inst("subi", info.reg_t[i].name, first_arg, tostring(right), NULL);
                         else
-                                print_inst("sub", info.reg_t[i].name, first_arg, second_arg);
+                                print_inst("sub", info.reg_t[i].name, first_arg, second_arg, NULL);
                         break;
                 }
         }

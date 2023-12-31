@@ -103,7 +103,7 @@ size_t calc(notUsed size_t line_num)
                 {
                         info.reg_s[i].var = info.all_lines[line_num]->tokens[1];
                         info.reg_s[i].value = last_temp ? value : atoi(info.all_lines[line_num]->tokens[3]);
-                        print_inst(load_type, info.reg_s[i].name, last_temp == NULL ? info.all_lines[line_num]->tokens[3] : last_temp, NULL);
+                        print_inst(load_type, info.reg_s[i].name, last_temp == NULL ? info.all_lines[line_num]->tokens[3] : last_temp, NULL, NULL);
                         break;
                 }
         }

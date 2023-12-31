@@ -29,7 +29,7 @@ size_t if_condition(size_t line_num)
 		else if (strcmp(begining_string, "}") == 0)
 		{
 			line_num += 1;
-                        print_inst("L", NULL, NULL, tostring(info.j_jumper));
+                        print_inst("L", NULL, NULL, tostring(info.j_jumper), NULL);
 			info.j_jumper++;
 			break;
 		}
@@ -45,7 +45,7 @@ size_t if_condition(size_t line_num)
 
 			decision(line_num);
 			line_num += 1;
-                        print_inst("C", NULL, NULL, tostring(info.j_jumper));
+                        print_inst("L", NULL, NULL, tostring(info.j_jumper), NULL);
 			info.j_jumper++;
 			break;
 		}
@@ -69,30 +69,27 @@ size_t if_condition(size_t line_num)
 
 void print_condition(int eql, char *a, char *b, char *symbol, int loop_or_condition)
 {
-	char *jump = ((loop_or_condition)? strdup("Exit") : strdup("Cond"));
+	char *jump = ((loop_or_condition)? strdup("Exit") : strdup("L"));
 	int jumper = ((loop_or_condition)? info.loop_jumper : info.j_jumper);
 
 	if(strcmp(symbol,">") == 0)
 	{
 		if(eql)
-                {
-			printf("\tblt %s %s %s%d:\n", return_reg(a).name, return_reg(b).name, jump, jumper);
-                        print_inst("blt", return_reg(a).name, return_reg(b).name, jump);
-                }
+                        print_inst("blt", return_reg(a).name, return_reg(b).name, jump, tostring(jumper));
 		else
-			printf("\tble %s %s %s%d:\n", return_reg(a).name, return_reg(b).name, jump, jumper);
+                        print_inst("ble", return_reg(a).name, return_reg(b).name, jump, tostring(jumper));
 	}
 	else if(strcmp(symbol,"<") == 0)
 	{
 		if(eql)
-			printf("\tbgt %s %s %s%d:\n", return_reg(a).name, return_reg(b).name, jump, jumper);
+                        print_inst("bgt", return_reg(a).name, return_reg(b).name, jump, tostring(jumper));
 		else
-			printf("\tbge %s %s %s%d:\n", return_reg(a).name, return_reg(b).name, jump, jumper);
+                        print_inst("bge", return_reg(a).name, return_reg(b).name, jump, tostring(jumper));
 	}
 	else if (strcmp(symbol,"!") == 0)	
-		printf("\tbeq %s %s %s%d:\n", return_reg(a).name, return_reg(b).name, jump, jumper);
+                print_inst("beq", return_reg(a).name, return_reg(b).name, jump, tostring(jumper));
 	else
-		printf("\tbne %s %s %s%d:\n", return_reg(a).name, return_reg(b).name, jump, jumper);
+                print_inst("bne", return_reg(a).name, return_reg(b).name, jump, tostring(jumper));
 }
 
 /**
@@ -141,15 +138,15 @@ size_t else_or_elseif_condition(size_t line_num, int count_conditions)
 		{
 			if (count_conditions > 1)
 			{
-				printf("\tJK%d\n", info.k_jumper);
-				printf("Cond%d:\n", info.j_jumper);
+                                print_inst("J", NULL, NULL, "K", tostring(info.k_jumper));
+                                print_inst("L", NULL, NULL, tostring(info.k_jumper), NULL);
 				info.j_jumper++;
 				flag = 0;
 				count_conditions--;
 			}
 			else
 			{
-				printf("K%d:\n", info.k_jumper);
+                                print_inst("K", NULL, NULL, tostring(info.k_jumper), NULL);
 				info.k_jumper++;
 				line_num += 1;
 				return (line_num);
@@ -161,25 +158,27 @@ size_t else_or_elseif_condition(size_t line_num, int count_conditions)
 				flag = 1;
 			else
 			{
-				/*printf("\tConddddtion %lu\n", line_num);*/
+				/*printf("\tLdddtion %lu\n", line_num);*/
 				decision(line_num);
 			}
 		}
 		else if (flag == 0)
 		{
 			decision(line_num);
-			/*printf("\tConddddtion\n");*/
+			/*printf("\tLdddtion\n");*/
 			if (count_conditions > 1)
 			{
-				printf("\tJK%d\n", info.k_jumper);
-				printf("Cond%d:\n", info.j_jumper);
+
+                                print_inst("J", NULL, NULL, "K", tostring(info.k_jumper));
+                                print_inst("L", NULL, NULL, tostring(info.j_jumper), NULL);
 				info.j_jumper++;
 				flag = 0;
 				count_conditions--;
 			}
 			else
 			{
-				printf("K%d:\n", info.k_jumper);
+                                print_inst("K", NULL, NULL, tostring(info.k_jumper), NULL);
+
 				info.k_jumper++;
 				line_num += 1;
 				return (line_num);

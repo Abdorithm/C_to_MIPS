@@ -135,10 +135,11 @@ char *slice_token(char **token)
  * print_inst - print an instruction with colors
  *
  * @inst: the instruction
- * @reg: the register
+ * @reg1: the register
+ * @reg2: the register
  * @imd: extra
  */
-void print_inst(char *inst, char *reg1, char *reg2, char *imd)
+void print_inst(char *inst, char *reg1, char *reg2, char *imd, char *num)
 {
         if (reg1 == NULL) /* label */
         {
@@ -151,6 +152,13 @@ void print_inst(char *inst, char *reg1, char *reg2, char *imd)
         printf(LIGHTGREEN);
         printf("\t%s\t", inst);
         printf(RESET"$"CYAN);
+        if (inst[0] == 'J')
+        {
+                printf(ORANGE);
+                printf("%s%s\n", imd, num);
+                printf(RESET);
+                return;
+        }
         printf("%s", reg1);
         printf(RESET", $"CYAN);
         printf("%s", reg2);
@@ -162,9 +170,17 @@ void print_inst(char *inst, char *reg1, char *reg2, char *imd)
         }
 
         printf(", ");
+        if (num)
+        {
+                printf("$"ORANGE);
+                printf("%s%s\n", imd, num);
+                printf(RESET);
+                return;
+        }
         if (!isdigit(*imd))
                 printf("$"CYAN);
         printf("%s\n", imd);
         printf(RESET);
         
 }
+

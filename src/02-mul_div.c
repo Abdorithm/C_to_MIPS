@@ -72,10 +72,10 @@ void assign_args(char **first_arg, char **second_arg, int left, int right)
         if (*first_arg == NULL && *second_arg == NULL)
         {
 
-                print_inst("sub", "t0", "t0", "t0");
-                print_inst("addi", "t0", "t0", tostring(left));
-                print_inst("sub", "t1", "t1", "t1");
-                print_inst("addi", "t0", "t0", tostring(right));
+                print_inst("sub", "t0", "t0", "t0", NULL);
+                print_inst("addi", "t0", "t0", tostring(left), NULL);
+                print_inst("sub", "t1", "t1", "t1", NULL);
+                print_inst("addi", "t0", "t0", tostring(right), NULL);
 
                 *first_arg = "$t0", *second_arg = "$t1";
         }
@@ -108,11 +108,11 @@ int mul(char *left_s, char *right_s, size_t line_num)
                         info.reg_t[i].value = left * right;
                         info.reg_t[i].var = info.all_lines[line_num]->tokens[1];
                         if (first_arg == NULL && second_arg != NULL)
-                                print_inst("muli", info.reg_t[i].name, second_arg, tostring(left));
+                                print_inst("muli", info.reg_t[i].name, second_arg, tostring(left), NULL);
                         else if (first_arg != NULL && second_arg == NULL)
-                                print_inst("muli", info.reg_t[i].name, first_arg, tostring(right));
+                                print_inst("muli", info.reg_t[i].name, first_arg, tostring(right), NULL);
                         else
-                                print_inst("mul", info.reg_t[i].name, first_arg, second_arg);
+                                print_inst("mul", info.reg_t[i].name, first_arg, second_arg, NULL);
                         break;
                 }
         }
@@ -143,8 +143,8 @@ int divs(char *left_s, char *right_s, size_t line_num)
         if (first_arg == NULL && second_arg != NULL)
         {
 
-                print_inst("sub", "t0", "t0", "t0");
-                print_inst("addi", "t0", "t0", tostring(left));
+                print_inst("sub", "t0", "t0", "t0", NULL);
+                print_inst("addi", "t0", "t0", tostring(left), NULL);
                 first_arg = "$t0";
         }
 
@@ -155,9 +155,9 @@ int divs(char *left_s, char *right_s, size_t line_num)
                         info.reg_t[i].value = left / right;
                         info.reg_t[i].var = info.all_lines[line_num]->tokens[1];
                         if (first_arg != NULL && second_arg == NULL)
-                                print_inst("divi", info.reg_t[i].name, first_arg, tostring(right));
+                                print_inst("divi", info.reg_t[i].name, first_arg, tostring(right), NULL);
                         else
-                                print_inst("div", info.reg_t[i].name, first_arg, second_arg);
+                                print_inst("div", info.reg_t[i].name, first_arg, second_arg, NULL);
                         break;
                 }
         }
