@@ -7,6 +7,15 @@
  * Return: the next line number after the if condition ends
 */
 
+// if (a > 4)
+// {
+//	a++
+// }
+// else if (a > 7)
+//	a++
+// else 
+//	a++
+
 size_t if_condition(size_t line_num)
 {
 	char *a, *b, *symbol, *begining_string;
@@ -58,6 +67,7 @@ size_t if_condition(size_t line_num)
  * @loop_or_condition : check if the 
  *	funcition were a loop or condidrtion
  * @eql : check if the condition has equal ">= , <="
+ * @loop_or_condition : bool 1 or 0
 */
 
 void print_condition(int eql, char *a, char *b, char *symbol, int loop_or_condition)
