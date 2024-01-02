@@ -6,14 +6,10 @@ It is a program for converting from the C language to the MIPS language. The pro
 
 We are six students at the Faculty of Engineering in Port Said, studying Software Engineering. We have undertaken this project as an application for the Microprocessor course to facilitate the conversion of codes from C to MIPS.
 
-## Compileing
-utilize this command to compile the code.
+## Installing
+to install mipsify
 ```bash
-gcc -Wall -Wextra -Werror -pedantic  -std=gnu89  headers/main.h  *.c  -o mipsify -g
-```
-or you can just type
-```bash
-make
+sudo make install
 ```
 
 ## Usage instructions
@@ -33,10 +29,8 @@ touch tests/test.txt
 Run the `mipsify` script and provide your C file in the test directory as an argument. For example:
 
 ```bash
-./mipsify tests/test.txt
+mipsify tests/test.txt
 ```
-
-This will execute the MIPSify tool on your C code and generate the corresponding MIPS assembly code. Ensure that the `mipsify` script has the necessary permissions to execute (`chmod +x mipsify`).
 
 ## Code Conversion Assumptions
 

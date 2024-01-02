@@ -1,4 +1,6 @@
 #include "headers/main.h"
+#include <ctype.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -128,3 +130,67 @@ char *slice_token(char **token)
 	*token += slice_size;
 	return (new_slice);
 }
+
+/**
+ * print_inst - print an instruction with colors
+ *
+ * @inst: the instruction
+ * @reg1: the register
+ * @reg2: the register
+ * @imd: extra
+ */
+void print_inst(char *inst, char *reg1, char *reg2, char *imd, char *num)
+{
+        if (reg1 == NULL && num == NULL) /* label */
+        {
+                printf("$"ORANGE);
+                printf("%s%s", inst, imd);
+                printf(RESET);
+                printf(":\n");
+                printf(RESET);
+                return;
+        }
+        printf(LIGHTGREEN);
+        printf("\t%s\t", inst);
+        printf(RESET"$"CYAN);
+        if (inst[0] == 'J')
+        {
+                printf(ORANGE);
+                printf("%s%s\n", imd, num);
+                printf(RESET);
+                return;
+        }
+        printf("%s", reg1);
+        if (isdigit(*reg2))
+        {
+                printf(RESET", ");
+                printf("%s", reg2); 
+        }
+        else 
+        {
+
+                printf(RESET", $"CYAN);
+                printf("%s", reg2);
+                printf(RESET);
+        }
+        if (imd == NULL)
+        {
+                printf("\n");
+                return;
+        }
+
+        printf(", ");
+        if (num)
+        {
+                printf("$"ORANGE);
+                printf("%s%s\n", imd, num);
+                printf(RESET);
+                return;
+        }
+        if (!isdigit(*imd))
+                printf("$"CYAN);
+        printf("%s\n", imd);
+        printf(RESET);
+        
+}
+

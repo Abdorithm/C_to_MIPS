@@ -32,20 +32,21 @@ int main(int argc, char *argv[])
 		read = getline(&info.curr_line, &len, info.file);
 		if (read == EOF)
 			break;
-		add_line();
-	}
+                add_line();
+        }
 
-    for (i = 0; i < info.line_cnt; i++)
-    {
-    	i = decision(i);
-		i--;
-    }
-	/* exist */
-	printf("\n");
-    overview();
-    credits();
-	free_all();
-	printf("\n");
-	ascii();
-	return (0);
+        for (i = 0; i < info.line_cnt; i++)
+        {
+                i = decision(i);
+                i--;
+        }
+        /* exist */
+        printf("\n");
+        overview();
+        credits();
+        free_all();
+        printf("\n");
+        ascii();
+
+        return (0);
 }

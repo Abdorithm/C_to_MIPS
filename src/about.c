@@ -66,5 +66,4 @@ void ascii(void)
         printf("░      ░    ▒ ░░░       ░  ░  ░   ▒ ░ ░ ░     ▒ ▒ ░░  \n");
         printf("       ░    ░                 ░   ░           ░ ░      \n");
         printf("                                              ░ ░      \n");
-        printf(RESET);
 }

@@ -41,10 +41,9 @@ void count_loop_tokens(size_t line_num, int *init, int *cond, int *increament)
 void preprocess(char *name, int num)
 {
 	put_in_register(name, num, 't');
-	printf("\tsub %s %s %s\n", return_reg(name).name,
-		return_reg(name).name, return_reg(name).name);
-	printf("\taddi %s %s %d\n", return_reg(name).name,
-		return_reg(name).name, return_reg(name).value);
+        print_inst("sub", return_reg(name).name, return_reg(name).name, return_reg(name).name, NULL);
+        print_inst("addi", return_reg(name).name, return_reg(name).name, tostring(return_reg(name).value), NULL);
+
 }
 
 /**
@@ -71,7 +70,7 @@ size_t while_loop(size_t line_num)
 		preprocess(a, atoi(a));
 	if (valid_int(b))
 		preprocess(b, atoi(b));
-	printf("loop%d:\n", info.loop_jumper);
+        print_inst("loop", NULL, NULL, tostring(info.loop_jumper), NULL);
 	print_condition(eql, a, b, symbol, 1);
 	if (!strcmp("{", info.all_lines[line_num + 1]->tokens[0]))
 	{
@@ -84,8 +83,8 @@ size_t while_loop(size_t line_num)
 	}
 	else
 		decision(i - 1);
-	printf("\tJ loop%d\n", info.loop_jumper);
-	printf("Exit%d:\n", info.loop_jumper);
+        print_inst("J", NULL, NULL, "loop", tostring(info.loop_jumper));
+        print_inst("Exit", NULL, NULL, tostring(info.loop_jumper), NULL);
 	info.loop_jumper++;
 	return(i);
 }
@@ -111,7 +110,7 @@ size_t for_loop(size_t line_num)
 	eql = ((cnt_cond == 4)? 1 : 0);
 	b = info.all_lines[line_num]->tokens[cnt_init + 5 + eql];
 	if (valid_int(b)) preprocess(b, atoi(b));
-	printf("loop%d:\n", info.loop_jumper);
+        print_inst("loop", NULL, NULL, tostring(info.loop_jumper), NULL);
 	print_condition(eql, a, b, symbol, 1);
 	if (!strcmp("{", info.all_lines[line_num + 1]->tokens[0]))
 	{
@@ -121,16 +120,16 @@ size_t for_loop(size_t line_num)
 			i++;
 		}
 		i++;
-		printf("\taddi %s %s 1\n", return_reg(a).name, return_reg(a).name);
+                print_inst("addi", return_reg(a).name, return_reg(a).name, tostring(1), NULL);
 		/* handle increament */
 	}
 	else
 	{
 		decision(i - 1);
-		printf("\taddi %s %s 1\n", return_reg(a).name, return_reg(a).name);
+                print_inst("addi", return_reg(a).name, return_reg(a).name, tostring(1), NULL);
 	}
-	printf("\tJ loop%d\n", info.loop_jumper);
-	printf("Exit%d:\n", info.loop_jumper);
+        print_inst("J", NULL, NULL, "loop", tostring(info.loop_jumper));
+        print_inst("Exit", NULL, NULL, tostring(info.loop_jumper), NULL);
 	info.loop_jumper++;
 	return (i);
 }
